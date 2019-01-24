@@ -1,0 +1,113 @@
+<%
+status  =  JSON.parse(JSON.stringify(data.status[0]));
+client  =  JSON.parse(JSON.stringify(data.client));
+%>
+<!DOCTYPE html>
+<html lang="en">
+	<%- include layouts/head -%>
+	<body>
+		<section class="object">
+			<div class="content card rounded-0 border-0 bg-secondary">
+				<!----------------- check status server ------------------->
+				<div id="remote-header" class="card-header <% if(status.client != "connected") {  %>  bg-danger <% } else { %>  bg-success <% }  %> rounded-0 clearfix">
+					<div class="clearfix">
+						<div class="float-left">
+							<h4 class="text-left text-white mb-0 font-weight-normal">Remote Protocol</h4>
+						</div>
+						<div class="float-right">
+							<a href="/create" class="btn-round ">
+								<span class="fa fa-plus text-white"></span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="card-content pb-3 px-0">
+					<!------------------- starting list -------------------->	
+					<div class="status make-status mb-3" status="<%= status.client %>">
+						<div id="client-status" class="w-100  text-white   clearfix mt-0 py-1 px-3 <% if(status.client != "connected") {  %>  bg-danger <% } else { %>  bg-success <% }  %>" id="status">
+							<div class="float-left"><span>Client Status :&nbsp;</span></div>
+							<div class="float-left"><span><span id="c-status"><%= status.client %></span></div>
+						</div>
+						<div id="power-status" class="w-100 <% if(status.power == "battery") {  %>  bg-warning <% } else { %>  bg-success <% }  %> check-power	  text-white  clearfix mt-0 py-1 px-3" id="status">
+							<div class="float-left"><span>power status :&nbsp;</span></div>
+							<div class="float-left"><span id="p-status"><%= status.power %></span></div>
+						</div>
+					</div>
+
+
+					<div class="mb-3"></div>
+					<% client.forEach(function(data,index){  %>
+					<div class="w-100  parent-option py-1 px-3" data-id="<%= data.id %>" type="<%= data.mode %>" status="<%= data.status %>">
+						<div class="clearfix d-block w-100 py-1">
+							<div class="float-left">
+								<h5 class="text-left text-grey font-weight-normal"><%= data.name %></h5>
+							</div>
+							<div class="float-right " style="margin-right:-8px">
+								<a href="./edit/<%= data.id %>" class="btn-edit edit-me  ">
+									<span class="fa fa-ellipsis-v text-blue"></span>
+								</a>
+							</div>
+							<div class="float-right mr-2">
+								<a href="./view/<%= data.id %>" class="btn-edit edit-me">
+									<span class="fa fa-eye text-blue"></span>
+								</a>
+							</div>
+							<div class="float-right mr-2">
+								<a class="btn-edit delete-me ">
+									<span class="fa fa-trash text-blue"></span>
+								</a>
+							</div>
+						</div>
+						<div class="row border-top border-bottom py-2">
+							<div class="col-8">
+								<div class="from-group">
+									<select name="" id="" class="form-control control-option-type">
+										<option value=""   disabled>Choose Option</option>
+										<option value="switch" <% if (data.mode == "switch"){ %> selected <% } %>
+										>Switch</option>
+										<option value="blink" <% if (data.mode == "blink"){ %> selected <% } %>>Blink</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-4">
+								<button class=" btn-switch float-right switch-status" >
+								<div class="parent-button">
+									<div class="button-status">
+										<span class="status on">On</span>
+										<span class="status off">Off</span>
+									</div>
+								</div>
+								</button>
+							</div>
+						</div>
+						<div class="row  border-bottom border-max pt-2 pb-3">
+							<div class="col-8">
+								<div class="from-group status-dem   " type="blink">
+									<input type="text" name="" value="<%= data.time_interval %>"  class="form-control interval-option" placeholder="BLink Interval">
+								</div>
+								<div class="from-group status-dem" type="switch">
+									<select name="" id="" class="form-control switch-option">
+										<option value=""   disabled>Choose Status</option>
+										<option value="off" <%if(data.switch == "off"){ %> selected <% } %>  >Disable</option>
+										<option value="on"  <%if(data.switch == "on"){ %> selected <% } %>>Enable</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-4">
+								<button class=" btn btn-blue py-1  px-4 ml-auto float-right btn-save save-me" >Save</button>
+							</div>
+						</div>
+					</div>
+					<!------------------- Ending list -------------------->
+					<% }); %>
+				</div>
+			</section>
+
+			<div class="make-refresh">
+			<button class="button-refresh">
+				<span class="fa fa-refresh"></span>
+			</button>	
+			</div>
+			
+		</body>
+	</html>

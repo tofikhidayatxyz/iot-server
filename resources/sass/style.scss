@@ -1,0 +1,170 @@
+@import "_plugins/variabel";
+* {
+	box-shadow:none !important;
+}
+a {
+	text-decoration:none !important;
+}
+.object {
+	display: flex;
+	justify-content: center;
+	.content {
+		max-width: 550px;
+	}
+}
+.card{
+	width: 100%;
+	display: block;
+	.card-header {
+		height: 60px;
+		overflow:hidden;
+	}
+	.card-content {
+		padding-bottom: 100px !important;
+		box-sizing:border-box !important;
+		height: calc(100vh - 60px);
+		overflow-x: hidden !important;
+		overflow-y: auto !important; 
+	}
+}
+
+.parent-option {
+	.status-dem {
+		display: none;
+	}
+		&[type=switch] {
+			.status-dem[type=switch] {
+				display: block !important;
+			}
+		}
+		&[type=blink] {
+			.status-dem[type=blink] {
+				display: block !important;
+			}
+		}
+
+		&[status="disable"] {
+			input , select , button:not(.switch-status):not(.btn-edit):not(.btn-save) {
+				pointer-events:none !important;
+				background-color: #C2C2C2;
+				border-color: #C2C2C2 !important;
+			}
+		.off {
+			display: block !important;
+		}
+		.button-status {
+			left:0px;
+		}
+		}
+		&[status="enable"] {
+			.on {
+			display: block !important;
+			}
+			.button-status {
+				left:calc( 100% - 28px);
+			}
+		}
+
+}
+
+/* button */
+.btn-switch {
+	width: 80px;
+	border-radius: 50px;
+	padding: 2px;
+	border:2px solid #607d8b !important;
+	display: block;
+	background-color: transparent;
+	@include normal-button();
+	margin-top: 1px;
+	.button-status {
+		height: 28px;
+		width: 28px;
+		border-radius: 100%;
+		background-color:#607d8b;
+		transition: .2s ease;
+		position: relative;
+		span{ 
+			display: none;
+		position: relative;
+			font-size: 12px;
+			color: var(--white);
+			top: 3px;
+			left: -1px;
+		 }	
+	}
+}
+.btn-edit {
+	font-size: 19px !important;
+	@include normal-button();
+	position: relative;
+	span {
+		font-size: 26px;
+		margin-top: -2px;
+	}
+}
+
+.btn-round {
+	height: 35px;
+	width: 35px;
+	border:1.5px solid white !important;
+	border-radius:100%;
+	display: block;
+	overflow:hidden;
+	@include normal-button();
+	span {
+		position: relative;
+		left: 7px;
+		font-size: 18px;
+		font-weight: bold;
+		top: 4px;
+	}
+}
+
+.make-refresh {
+	position: fixed;
+	bottom:  15px;
+	left: 0;
+	right: 0;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	.button-refresh {
+		display: flex;
+		margin: 0 auto;
+		height: 35px;
+		width: 35px;
+		border-radius:100%;
+		border:0px solid transparent  !important;
+		justify-content: center;
+		vertical-align: middle;
+		align-items: center;
+		@include normal-button();
+		color: var(--white);
+		background-color: var(--blue);
+		box-shadow: 0px 1px 10px 5px rgba(0,0,0,.1) !important;
+		span {
+			font-size: 25px;
+			animation: refresh 3s linear infinite;
+		}
+	}
+}
+
+@keyframes refresh {
+	from {
+		transform: rotate(0deg);
+	} to {
+		transform: rotate(360deg);
+	}
+}
+
+.make-status {
+	&[status=connected] {
+		.check-power {
+			display: block;
+		}
+	}
+	.check-power {
+		display: none;
+	}
+}

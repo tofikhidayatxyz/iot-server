@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<%- include layouts/head -%>
+	<body>
+		<section class="object">
+			<div class="content card rounded-0 border-0 bg-secondary">
+				<div class="card-header bg-blue rounded-0 clearfix">
+					<div class="clearfix">
+						<div class="float-left">
+							<h4 class="text-left text-white mb-0 font-weight-normal">View Protocol</h4>
+						</div>
+					</div>
+				</div>
+				<div class="card-content py-3 px-3">
+					<div class="w-100 border-bottom clearfix py-2">
+						<h6 class="text-left float-left mb-2">Id : </h6>
+						<h6 class="text-left float-left mb-0 font-weight-normal pl-2"><%= data.id  %></h6>
+					</div>
+					<div class="w-100 border-bottom py-2">
+						<h6 class="text-left mb-2">Name : </h6>
+						<h6 class="text-left mb-0 font-weight-normal"><%= data.name  %></h6>
+					</div>
+					<div class="w-100 border-bottom py-2">
+						<h6 class="text-left mb-2">Access : </h6>
+						<h6 class="text-left mb-0 font-weight-normal"><%= data.access  %></h6>
+					</div>
+					<div class="w-100 border-bottom py-2">
+						<h6 class="text-left mb-2">description : </h6>
+						<h6 class="text-left mb-0 font-weight-normal"><%= data.description  %></h6>
+					</div>
+					<div class="w-100 border-bottom py-2">
+						<h6 class="text-left mb-2">Status : </h6>
+						<h6 class="text-left mb-0 font-weight-normal"><%= data.status  %></h6>
+					</div>
+					<div class="w-100 border-bottom py-2">
+						<h6 class="text-left mb-2">Mode : </h6>
+						<h6 class="text-left mb-0 font-weight-normal"><%= data.mode  %></h6>
+					</div>
+					<div class="w-100 border-bottom py-2">
+						<h6 class="text-left mb-2">Switch Status : </h6>
+						<h6 class="text-left mb-0 font-weight-normal"><%= data.switch  %></h6>
+					</div>
+					<div class="w-100 border-bottom py-2">
+						<h6 class="text-left mb-2">Blink Intetrval : </h6>
+						<h6 class="text-left mb-0 font-weight-normal"><%= data.interval  %></h6>
+					</div>
+					<div class="w-100 d-block pt-3">
+						<a  class="float-right btn btn-primary px-4"  href="/edit/<%= data.id %>" >Edit</a>
+						<a href="/start" class="float-right mr-4 btn btn-primary px-3">Cancel</a>
+					</div>
+				</div>
+			</section>
+			
+		</body>
+	</html>

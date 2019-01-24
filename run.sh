@@ -1,0 +1,1 @@
+nodemon & npm run watch

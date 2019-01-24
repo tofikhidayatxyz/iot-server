@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%= error.status %> </title>
+	<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="container py-5">
+	<h2 class="text-center mb-3"><%= error.name %> </h2>
+	<p><%=  error.stack %></p>	
+</div>
+</body>
+</html>

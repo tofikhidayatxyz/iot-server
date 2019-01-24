@@ -1,0 +1,21 @@
+/* setting thme color */
+$theme-colors: (
+	"primary" : #005792,
+	"secondary" : #f4f3f3,
+	"grey" :#808080,
+	"blue" : #607d8b
+);
+
+$grey : #EFEFEF;
+$semi-grey : #AFB7BE;
+$med-grey :#888888;
+
+/* import bootstrap */
+
+@import "~bootstrap/scss/bootstrap";
+/*import mixin */
+@import 'mixin';
+/* sweet alert */
+@import '~sweetalert2/src/sweetalert2.scss';
+/*import line awesome /font awesome */
+@import '~line-awesome/src/line-awesome';
