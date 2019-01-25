@@ -11434,8 +11434,18 @@ $(document).on('click', '.button-refresh', function (event) {
 });
 
 setInterval(function (e) {
-	$.getJSON('/status', function (json, textStatus) {
-		var data = json[0];
+	$.ajax({
+		url: '/status',
+		async: false
+	}).done(function (data) {
+		var data = data[0];
+		$("#remote-header").removeClass('bg-danger').addClass('bg-success');
+		$(".btn-save").removeClass('disable');
+		$(".u-status").text("Conneted");
+		$(".user-status").removeClass('bg-danger').addClass('bg-success');
+		$(".make-status").removeClass('d-none');
+		$("#u-status").text("Connected");
+
 		$(".make-status").attr('status', data.client);
 		$("#c-status").text(data.client);
 		$("#p-status").text(data.power);
@@ -11450,8 +11460,20 @@ setInterval(function (e) {
 		} else {
 			$("#power-status").removeClass('bg-warning').addClass('bg-success');
 		}
+	}).fail(function (err) {
+		$("#u-status").text("Disconnect");
+		$("#remote-header").addClass('bg-danger').removeClass('bg-success');
+		$(".btn-save").addClass('disable');
+		$(".u-status").text("Disconnect");
+		$(".user-status").removeClass('bg-success').addClass('bg-danger');
+		$(".make-status").addClass('d-none');
 	});
 }, 1000);
+
+$("#list-parent").hide();
+$("#dropdown-status").click(function (event) {
+	$("#list-parent").slideToggle('fast');
+});
 
 /***/ }),
 /* 18 */

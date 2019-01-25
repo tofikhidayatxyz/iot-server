@@ -5,6 +5,9 @@
 a {
 	text-decoration:none !important;
 }
+.disable {
+	pointer-events: none !important;
+}
 .object {
 	display: flex;
 	justify-content: center;
@@ -167,4 +170,16 @@ a {
 	.check-power {
 		display: none;
 	}
+}
+
+
+.btn-save.disable {
+	background-color: #808080 !important;
+	border-color: #808080 !important;
+}
+
+.view-menu {
+	font-size: 25px;
+	position: relative;
+	top: -4px;
 }

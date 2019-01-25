@@ -19,22 +19,31 @@ client  =  JSON.parse(JSON.stringify(data.client));
 								<span class="fa fa-plus text-white"></span>
 							</a>
 						</div>
+						<div class="float-right">
+							<button id="dropdown-status" class="btn  view-menu  px-2 mr-2 bg-transparent p-0">
+							<span class="fa fa-bars text-white"></span>
+							</button>
+						</div>
 					</div>
 				</div>
 				<div class="card-content pb-3 px-0">
-					<!------------------- starting list -------------------->	
-					<div class="status make-status mb-3" status="<%= status.client %>">
-						<div id="client-status" class="w-100  text-white   clearfix mt-0 py-1 px-3 <% if(status.client != "connected") {  %>  bg-danger <% } else { %>  bg-success <% }  %>" id="status">
-							<div class="float-left"><span>Client Status :&nbsp;</span></div>
-							<div class="float-left"><span><span id="c-status"><%= status.client %></span></div>
+					<!------------------- starting list -------------------->
+					<div id="list-parent">
+						<div id="user-status "  class="bg-success d-block clearfix user-status px-3 text-white py-1">
+							<div class="float-left"><span>User Status :&nbsp;</span></div>
+							<div class="float-left"><span id="u-status">User Status</span></div>
 						</div>
-						<div id="power-status" class="w-100 <% if(status.power == "battery") {  %>  bg-warning <% } else { %>  bg-success <% }  %> check-power	  text-white  clearfix mt-0 py-1 px-3" id="status">
-							<div class="float-left"><span>power status :&nbsp;</span></div>
-							<div class="float-left"><span id="p-status"><%= status.power %></span></div>
+						<div class="status make-status mb-3 " status="<%= status.client %>">
+							<div id="client-status" class="w-100  text-white   clearfix mt-0 py-1 px-3 <% if(status.client != "connected") {  %>  bg-danger <% } else { %>  bg-success <% }  %>" id="status">
+								<div class="float-left"><span>Client Status :&nbsp;</span></div>
+								<div class="float-left"><span><span id="c-status"><%= status.client %></span></div>
+							</div>
+							<div id="power-status" class="w-100 <% if(status.power == "battery") {  %>  bg-warning <% } else { %>  bg-success <% }  %> check-power	  text-white  clearfix mt-0 py-1 px-3" id="status">
+								<div class="float-left"><span>Power Status :&nbsp;</span></div>
+								<div class="float-left"><span id="p-status"><%= status.power %></span></div>
+							</div>
 						</div>
 					</div>
-
-
 					<div class="mb-3"></div>
 					<% client.forEach(function(data,index){  %>
 					<div class="w-100  parent-option py-1 px-3" data-id="<%= data.id %>" type="<%= data.mode %>" status="<%= data.status %>">
@@ -102,11 +111,10 @@ client  =  JSON.parse(JSON.stringify(data.client));
 					<% }); %>
 				</div>
 			</section>
-
 			<div class="make-refresh">
-			<button class="button-refresh">
+				<button class="button-refresh">
 				<span class="fa fa-refresh"></span>
-			</button>	
+				</button>
 			</div>
 			
 		</body>
