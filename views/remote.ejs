@@ -30,16 +30,19 @@ client  =  JSON.parse(JSON.stringify(data.client));
 					<!------------------- starting list -------------------->
 					<div id="list-parent">
 						<div id="user-status "  class="bg-success d-block clearfix user-status px-3 text-white py-1">
-							<div class="float-left"><span>User Status :&nbsp;</span></div>
+							<div class="float-left"><span>User Status </span></div>
+							<div class="float-left"><span class="text-center px-3">:</span></div>
 							<div class="float-left"><span id="u-status">User Status</span></div>
 						</div>
-						<div class="status make-status mb-3 " status="<%= status.client %>">
+						<div class="status make-status " status="<%= status.client %>">
 							<div id="client-status" class="w-100  text-white   clearfix mt-0 py-1 px-3 <% if(status.client != "connected") {  %>  bg-danger <% } else { %>  bg-success <% }  %>" id="status">
-								<div class="float-left"><span>Client Status :&nbsp;</span></div>
+								<div class="float-left"><span>Client Status</span></div>
+								<div class="float-left"><span class="text-center px-3">:</span></div>
 								<div class="float-left"><span><span id="c-status"><%= status.client %></span></div>
 							</div>
 							<div id="power-status" class="w-100 <% if(status.power == "battery") {  %>  bg-warning <% } else { %>  bg-success <% }  %> check-power	  text-white  clearfix mt-0 py-1 px-3" id="status">
-								<div class="float-left"><span>Power Status :&nbsp;</span></div>
+								<div class="float-left"><span>Power Status</span></div>
+								<div class="float-left"><span class="text-center px-3">:</span></div>
 								<div class="float-left"><span id="p-status"><%= status.power %></span></div>
 							</div>
 						</div>

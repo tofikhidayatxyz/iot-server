@@ -11366,6 +11366,11 @@ try {
 }
 
 
+$("#list-parent").hide();
+$("#dropdown-status").click(function (event) {
+	$("#list-parent").slideToggle('fast');
+});
+
 $(document).on('click', '.btn-switch', function (event) {
 	event.preventDefault();
 	if ($(this).closest('.parent-option').attr('status') == "enable") {
@@ -11469,11 +11474,6 @@ setInterval(function (e) {
 		$(".make-status").addClass('d-none');
 	});
 }, 1000);
-
-$("#list-parent").hide();
-$("#dropdown-status").click(function (event) {
-	$("#list-parent").slideToggle('fast');
-});
 
 /***/ }),
 /* 18 */

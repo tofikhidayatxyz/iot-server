@@ -40,6 +40,7 @@ app.use('/edit',require('./routes/edit'));
 app.use('/view',require('./routes/view'));
 app.use('/update',require('./routes/update'));
 app.use('/status',require('./routes/status'));
+app.use('/api',require('./routes/api'));
 /* ========= save */
 /* ============ end routing ==================*/
 // catch 404 and forward to error handler
@@ -56,4 +57,5 @@ app.use(function (err, req, res, next) {
 	res.render('error');
 });
 console.log("Sever Running on = " + process.env.HOST + ":" + process.env.PORT);
+require('./schedule')
 module.exports = app;
