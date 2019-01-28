@@ -41,6 +41,8 @@ app.use('/view',require('./routes/view'));
 app.use('/update',require('./routes/update'));
 app.use('/status',require('./routes/status'));
 app.use('/api',require('./routes/api'));
+// beta api version
+app.use('/beta',require('./routes/beta'));
 /* ========= save */
 /* ============ end routing ==================*/
 // catch 404 and forward to error handler

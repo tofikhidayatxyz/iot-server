@@ -14,10 +14,10 @@ $("#dropdown-status").click(function(event) {
 
 $(document).on('click', '.btn-switch', function(event) {
 	event.preventDefault();
-	if($(this).closest('.parent-option').attr('status') == "enable") {
-		$(this).closest('.parent-option').attr('status','disable');	
+	if($(this).closest('.parent-option').attr('status') == "on") {
+		$(this).closest('.parent-option').attr('status','off');	
 	} else {
-		$(this).closest('.parent-option').attr('status','enable');
+		$(this).closest('.parent-option').attr('status','on');
 	}
 });
 

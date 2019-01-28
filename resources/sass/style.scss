@@ -12,7 +12,7 @@ a {
 	display: flex;
 	justify-content: center;
 	.content {
-		max-width: 550px;
+		max-width: 360px;
 	}
 }
 .card{
@@ -46,7 +46,7 @@ a {
 			}
 		}
 
-		&[status="disable"] {
+		&[status="off"] {
 			input , select , button:not(.switch-status):not(.btn-edit):not(.btn-save) {
 				pointer-events:none !important;
 				background-color: #C2C2C2;
@@ -59,7 +59,7 @@ a {
 			left:0px;
 		}
 		}
-		&[status="enable"] {
+		&[status="on"] {
 			.on {
 			display: block !important;
 			}

@@ -16657,7 +16657,7 @@ a {
 }
 
 .object .content {
-  max-width: 550px;
+  max-width: 360px;
 }
 
 .card {
@@ -16691,27 +16691,27 @@ a {
   display: block !important;
 }
 
-.parent-option[status="disable"] input,
-.parent-option[status="disable"] select,
-.parent-option[status="disable"] button:not(.switch-status):not(.btn-edit):not(.btn-save) {
+.parent-option[status="off"] input,
+.parent-option[status="off"] select,
+.parent-option[status="off"] button:not(.switch-status):not(.btn-edit):not(.btn-save) {
   pointer-events: none !important;
   background-color: #C2C2C2;
   border-color: #C2C2C2 !important;
 }
 
-.parent-option[status="disable"] .off {
+.parent-option[status="off"] .off {
   display: block !important;
 }
 
-.parent-option[status="disable"] .button-status {
+.parent-option[status="off"] .button-status {
   left: 0px;
 }
 
-.parent-option[status="enable"] .on {
+.parent-option[status="on"] .on {
   display: block !important;
 }
 
-.parent-option[status="enable"] .button-status {
+.parent-option[status="on"] .button-status {
   left: calc( 100% - 28px);
 }
 
