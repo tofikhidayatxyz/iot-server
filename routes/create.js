@@ -7,15 +7,21 @@ router.get('/', function(req, res, next) {
 });
 /* save data */
 router.post('/save',function(req,res,next){
-	var name = req.param("name");
-	var access = req.param("access");
-	var description = req.param("description");
+	var name = req.param("name").toString();
+	var access = req.param("access").toString();
+	var description = req.param("description").toString();
 	db.query("INSERT INTO client (name,access,description) VALUES ('" + name + "','" + access + "','" + description + "')", function (err, results, fields) {
 		if (err) {
 			res.send(err);
 		}
 		console.log("succesed ....");
-		res.redirect("/start");
+		db.query("SELECT * FROM client WHERE id='"+results['insertId']+"'",function(err,results,fields){
+			if(err) {
+				res.send(err);
+			}
+			res.send(results);
+		});
+		
 	});
 })
 module.exports = router;

@@ -20,9 +20,11 @@ db.connect((err) => {
 });
 global.db = db;
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.use(require('express-edge'));
+//app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -30,19 +32,19 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 /* ============ routing =========*/
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/start', require('./routes/start'));
+//app.use('/users', usersRouter);
+app.use('/', require('./routes/start'));
 app.use('/create', require('./routes/create'));
 app.use('/delete',require('./routes/delete'));
 app.use('/edit',require('./routes/edit'));
-app.use('/view',require('./routes/view'));
-app.use('/update',require('./routes/update'));
-app.use('/status',require('./routes/status'));
+app.use('/view/',require('./routes/view'));
+//app.use('/update',require('./routes/update'));
+//app.use('/status',require('./routes/status'));
 app.use('/api',require('./routes/api'));
 // beta api version
-app.use('/beta',require('./routes/beta'));
+//app.use('/beta',require('./routes/beta'));
 /* ========= save */
 /* ============ end routing ==================*/
 // catch 404 and forward to error handler

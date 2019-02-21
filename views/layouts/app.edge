@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{{env.APP_NAME}}</title>
+		<!--  detect chanrset utf-8 css -->
+		<meta charset="utf-8">
+		<!--  suport responsive devices -->
+		<meta name="viewport" content="width=device-width , initial-scale=1.0">
+		<meta name="description" content="Template HTML RIP dari PSD.">
+		<!--  custom description css -->
+		<meta name="keywords" content="marketing">
+		<meta name="author" content="">
+		<link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
+		<link rel="icon" target="" ype="image" href="favicon.ico" sizes="32x32">
+		<link rel="icon" type="image" href="favicon.ico" sizes="16x16">
+		<link rel="manifest" href="">
+		<link rel="mask-icon" href="favicon.ico" color="#fff">
+		<meta name="theme-color" content="#ffff">
+		<meta property="fb:app_id" content="1234567890">
+		<meta property="og:locale" content="id_ID">
+		<meta property="og:title" content="Template HTML">
+		<meta property="og:url" content="hataco.com">
+		<meta property="og:type" content="website">
+		<meta property="og:description" content="Template HTML RIP dari PSD.">
+		<meta property="og:image" content="assets/images/favicon.png">
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:title" content="Template HTML">
+		<meta name="twitter:description" content="Template HTML RIP dari PSD.">
+		<meta name="twitter:url" content="bintang-group.com">
+		<meta name="twitter:image" content="favicon.png">
+		<meta name="twitter:image" content="favicon.png">
+		<!--  linked stylesheet file -->
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<!-- load javascript file -->
+		<script src="js/app.js" type="text/javascript" defer></script>
+		<body class="bg-secondary " id="content">
+			<div class="main" id="main-content">
+				<header id="header" class="bg-primary px-2 clearfix">
+					<div class="header-button float-left">
+						<button class="expander  btn p-0" id="expander">
+						<span></span>
+						<span></span>
+						<span></span>
+						</button>
+					</div>
+					<div class="header-text float-left">
+						<h3 class="text-center mb-0 text-white">{{env.APP_TITLE}}</h3>
+					</div>
+					<div class="header-plus float-left">
+						<button class="plus btn p-0" id="plus"> 
+							<span></span>
+							<span></span>
+						</button>
+					</div>
+				</header>
+				@include('layouts/side')
+				<main class="w-100 h-100 d-block">
+					@!section('content')
+				</main>
+			</div>
+		</body>
+	</html>

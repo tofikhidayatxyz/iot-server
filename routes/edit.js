@@ -9,7 +9,7 @@ router.get('/:id', function(req, res, next) {
   		console.log(err);
   		res.send(err);
   	} else {
-  		res.render('edit', { env:  process.env , data:JSON.parse(JSON.stringify(results))[0]});
+  		res.send(results);
   	}
   })
   
@@ -25,7 +25,24 @@ router.post('/update',function(req,res,next){
 			console.log(err);
 			res.send(err);
 		} else {
-			res.redirect('/start');
+			res.send(results);
+		}
+	});
+})
+router.post('/switch',function(req,res,next){
+	var id  =  req.param("id");
+	var status = req.param("status");
+	db.query("UPDATE client SET status='"+status+"' WHERE id="+id,function(err,results,fields){
+		if (err) {
+			console.log(err);
+			res.send(err);
+		} else {
+			db.query("SELECT * FROM client WHERE id='"+id+"'",function(err,results,fields){
+				if(err) {
+					res.send(err);
+				}
+				res.send(results);
+			});
 		}
 	});
 })

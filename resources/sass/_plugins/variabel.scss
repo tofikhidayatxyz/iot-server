@@ -1,9 +1,10 @@
 /* setting thme color */
 $theme-colors: (
-	"primary" : #005792,
+	"primary" : #a7d129,
 	"secondary" : #f4f3f3,
-	"grey" :#808080,
-	"blue" : #607d8b
+	"grey" :#738598,
+	"blue" : #607d8b,
+	"dark":#738598
 );
 
 $grey : #EFEFEF;
@@ -11,7 +12,6 @@ $semi-grey : #AFB7BE;
 $med-grey :#888888;
 
 /* import bootstrap */
-
 @import "~bootstrap/scss/bootstrap";
 /*import mixin */
 @import 'mixin';

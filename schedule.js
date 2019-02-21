@@ -1,6 +1,7 @@
 var moment =  require('moment');
 var interval  = 0;
 var env  =  require("dotenv").load();
+/*
 setInterval(function(data){
 	var date  =   moment().subtract(process.env.SCHEDULE,'seconds').format('YYYY-MM-DD hh:mm:ss');
 	db.query("SELECT  * from status LIMIT 1",function(err,results,fields){
@@ -18,3 +19,4 @@ setInterval(function(data){
 	})
 	interval  += 1;
 },1000)
+*/

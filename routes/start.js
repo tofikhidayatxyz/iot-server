@@ -14,8 +14,10 @@ router.get('/', function (req, res, next) {
 			}
 			res.render('remote', {
 				env: process.env,
-				data: data
+				data: JSON.parse(JSON.stringify(data))['client'],
+				req:req
 			});
+			//console.log(JSON.parse(JSON.stringify(data))['client'])
 		})
 	})
 });

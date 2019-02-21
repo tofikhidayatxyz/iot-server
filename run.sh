@@ -1,1 +1,1 @@
-nodemon & npm run watch
+nodemon -e js , .edge --ignore resources & npm run watch
