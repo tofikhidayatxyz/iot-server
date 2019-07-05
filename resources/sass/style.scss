@@ -47,14 +47,24 @@ header {
 .header-text {
 	width: calc(100% - 80px);
 }
+.button-view-stat {
+	height: 15px;
+	width: 15px;
+	border-radius: 100%;
+	@include normal-button();
+}
+.header-stat {
+	width: 50px;
+}
 .header-plus {
-	width: 40px;
+	width: 20px;
+	margin-left: 20px;
 }
 .expander {
 	transition: .2s ease;
 	span {
-		height: 3px;
-		width: 30px;
+		height: 2px;
+		width: 17px;
 		display: block;
 		position: relative;
 		background-color: var(--white);
@@ -88,8 +98,8 @@ header {
 .btn.plus {
 	transition: .2s ease;
 	span {
-		height: 3px;
-		width: 25px;
+		height: 2px;
+		width: 17px;
 		background-color: var(--white);
 		display: block;
 		transition: .3s ease;
@@ -169,7 +179,7 @@ main {
 	position: relative;
 }
 .shadow {
-	box-shadow: 1px 3px 10px 0px rgba(0,0,0,.1) !important; 
+	box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.1) !important; 
 }
 .list-parent {
 	.header-text {
@@ -238,7 +248,7 @@ main {
 		left: 0px;
 		opacity:0;
 		transition: .3s ease;
-		transition-timing-function: cubic-bezier(.84,.15,.38,.42);
+		///transition-timing-function: cubic-bezier(.84,.15,.38,.42);
 		color: var(--white);
 		line-height: 2.4;
 		text-align: center;
@@ -263,4 +273,7 @@ main {
 			width: 40px;
 			font-size: 20px;
 		}
+}
+.hide {
+	display: none !important;
 }

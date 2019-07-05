@@ -1,15 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mysql = require("mysql");
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var app = express();
+const createError = require('http-errors');
+const express = require('express');
+const env  =  require('dotenv').config();
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mysql = require("mysql");
+const compression = require('compression')
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const app = express();
+const minifyHTML = require('express-minify-html');
+
 /* connect to mysql basic */
 const db = mysql.createConnection({
 	host: process.env.HOST,
+  port: process.env.DB_PORT,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_NAME
@@ -21,8 +26,31 @@ db.connect((err) => {
 global.db = db;
 
 
+app.use(function(req, res, next) {
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   res.header('Access-Control-Allow-Credentials', true);
+   res.removeHeader("X-Powered-By");
+   next();
+});
+// minify
+app.use(minifyHTML({
+    override:      true,
+    exception_url: false,
+    htmlMinifier: {
+        removeComments:            true,
+        collapseWhitespace:        true,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes:     true,
+        removeEmptyAttributes:     true,
+        minifyJS:                  true
+    }
+}));
+// compress
+app.use(compression())
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'resources/views'));
 app.use(require('express-edge'));
 //app.set('view engine', 'ejs');
 app.use(logger('dev'));

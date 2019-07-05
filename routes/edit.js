@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var env  =  require('dotenv').load();
 /* GET home page. */
 router.get('/:id', function(req, res, next) {
   id  =  req.param('id');

@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var env  =  require('dotenv').load();
 var moment  =  require('moment');
 var jsonminify = require("jsonminify");
 /* GET home page. */

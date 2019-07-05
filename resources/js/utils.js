@@ -11,6 +11,50 @@ function checker(val1,val2) {
   check  = [];
   data   = [];
   return res;
-}export default {
-  checker
+}
+
+async function postData(url = '', data = {}) {
+    return new Promise(function(resolve,reject) {
+      fetch(url, {
+          method: 'POST',
+          mode: 'cors', 
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          redirect: 'follow',
+          referrer: 'no-referrer', 
+          body: data ? JSON.stringify(data) : false,
+      })
+      .then(response => resolve(response.json()))
+      .catch(err=>reject(err));
+    });
+}
+
+async function getData(url = '', data = {}) {
+    return new Promise(function(resolve,reject) {
+      fetch(url, {
+          method: 'GET',
+          mode: 'cors', 
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          redirect: 'follow',
+          referrer: 'no-referrer'
+          
+      })
+      .then(response => resolve(response.json()))
+      .catch(err=>reject(err));
+    });
+}
+
+
+
+export default {
+  checker ,
+  postData ,
+  getData
 }
