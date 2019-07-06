@@ -14950,9 +14950,9 @@ header {
 .button-view-stat {
   height: 15px;
   width: 15px;
+  border-radius: 100%;
   border: 0;
   cursor: pointer;
-  border-radius: 100%;
 }
 .button-view-stat:focus {
   outline: 0;
@@ -15187,4 +15187,17 @@ main {
 
 .hide {
   display: none !important;
+}
+
+.floating-bar {
+  display: block;
+  position: fixed;
+  z-index: 9999;
+  top: 50px;
+  left: 0;
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
 }

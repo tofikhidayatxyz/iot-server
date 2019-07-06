@@ -1,6 +1,9 @@
 'use strict'
 
+import Swal from 'sweetalert2'
+import util from './utils';
 let innerContentHeight  = 0;
+
 
 
 (()=>{
@@ -19,10 +22,6 @@ let innerContentHeight  = 0;
 	},100);
 })()
 
-
-//require('./swipe.js');
-import Swal from 'sweetalert2'
-import util from './utils';
  
 const swalWithBootstrapButtons = Swal.mixin({
   confirmButtonClass: 'btn btn-success',
@@ -85,6 +84,7 @@ document.querySelector('#plus').addEventListener('click',function(event) {
 	  	confirmButtonColor: 'var(--primary)',
 		cancelButtonColor: 'var(--danger)',
 		preConfirm: function() {
+			return false;
 		  return submitNewData()
 		}
 	})
@@ -99,19 +99,22 @@ function newValidate(title,desc,access) {
 	var errornum  = 0;
 	if(title.length == 0 ) {
 		errornum += 1;
-		document.querySelector('#new-label , #upd-label').classList.add('swal2-inputerror').focus();
+		document.querySelector('#new-label , #upd-label').classList.add('swal2-inputerror');
+		document.querySelector('#new-label , #upd-label').focus();
 	} else {
 		document.querySelector('#new-label , #upd-label').classList.remove('swal2-inputerror');
 	}
 	if(access.length == 0 ) {
 		errornum += 1;
-		document.querySelector('#new-access , #upd-access').classList.add('swal2-inputerror').focus();
+		document.querySelector('#new-access , #upd-access').classList.add('swal2-inputerror');
+		document.querySelector('#new-access , #upd-access').focus();
 	} else {
 		document.querySelector('#new-access , #upd-access').classList.remove('swal2-inputerror');
 	}
 	if(desc.length == 0 ) {
 		errornum += 1;
-		document.querySelector('#new-desc , #upd-desc').classList.add('swal2-inputerror').focus();
+		document.querySelector('#new-desc , #upd-desc').classList.add('swal2-inputerror');
+		document.querySelector('#new-desc , #upd-desc').focus();
 	} else {
 		document.querySelector('#new-desc , #upd-desc').classList.remove('swal2-inputerror');
 	}
@@ -120,7 +123,7 @@ function newValidate(title,desc,access) {
 
 // append element
 function appendElement(data) {
-	var obj  = `<div class='col-6 list-data px-2 py-2' id='data-ist-entry-' +data[ 'id']+ ''>
+	var obj  = `<div class='col-6 list-data px-2 py-2' id='data-ist-entry-${data['id']}'>
 			    <div class='card border-0 bg-white border-grey border shadow' style='height:' ${innerContentHeight}px;'>
 			        <div class='card-header bg-white pt-2 pb-2 px-3  clearfix'>
 			            <div class='clearfix text-truncate	'><small class='font-weight-bold text-grey  initial '>${data['name']}</small></div>
@@ -161,7 +164,7 @@ function submitNewData() {
 		  onBeforeOpen: () => {
 		    Swal.showLoading()
 		  },
-		 allowOutsideClick: false
+		 allowOutsideClick: false ,
 		});
 		// post data 
 		util.postData('/create/save',{ 
@@ -296,6 +299,7 @@ function callEntry() {
 				})
 			}).catch((err)=>{
 				Swal.close();
+				console.log(err)
 				failAlert(err.toString());
 			})
 		})
@@ -313,6 +317,7 @@ function callEntry() {
 			    cancelButtonColor: 'var(--danger)',
 				confirmButtonColor: 'var(--info)',
 				}).then((result) => {
+					if (result['dismiss'] == 'cancel') return false; 
 					util.postData('/delete',{id:item.getAttribute('data-id')})
 						.then((result)=>{
  							document.querySelector('.list-parent').removeChild(item.closest('.col-6'));
@@ -352,6 +357,7 @@ function update(id) {
 			subject.querySelector('.initial').textContent = title;
 			successAlert('Success Update Protocol');
 		}).catch((err)=>{
+			console.log(err);	
 			failAlert(err.toString());
 		});
 	}

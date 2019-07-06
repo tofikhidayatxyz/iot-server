@@ -3649,6 +3649,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./resources/js/utils.js");
 
 
+
+
 var innerContentHeight = 0;
 
 (function () {
@@ -3664,10 +3666,7 @@ var innerContentHeight = 0;
       searchData(findGetParameter('key'));
     }
   }, 100);
-})(); //require('./swipe.js');
-
-
-
+})();
 
 var swalWithBootstrapButtons = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
   confirmButtonClass: 'btn btn-success',
@@ -3718,6 +3717,7 @@ document.querySelector('#plus').addEventListener('click', function (event) {
     confirmButtonColor: 'var(--primary)',
     cancelButtonColor: 'var(--danger)',
     preConfirm: function preConfirm() {
+      return false;
       return submitNewData();
     }
   });
@@ -3731,21 +3731,24 @@ function newValidate(title, desc, access) {
 
   if (title.length == 0) {
     errornum += 1;
-    document.querySelector('#new-label , #upd-label').classList.add('swal2-inputerror').focus();
+    document.querySelector('#new-label , #upd-label').classList.add('swal2-inputerror');
+    document.querySelector('#new-label , #upd-label').focus();
   } else {
     document.querySelector('#new-label , #upd-label').classList.remove('swal2-inputerror');
   }
 
   if (access.length == 0) {
     errornum += 1;
-    document.querySelector('#new-access , #upd-access').classList.add('swal2-inputerror').focus();
+    document.querySelector('#new-access , #upd-access').classList.add('swal2-inputerror');
+    document.querySelector('#new-access , #upd-access').focus();
   } else {
     document.querySelector('#new-access , #upd-access').classList.remove('swal2-inputerror');
   }
 
   if (desc.length == 0) {
     errornum += 1;
-    document.querySelector('#new-desc , #upd-desc').classList.add('swal2-inputerror').focus();
+    document.querySelector('#new-desc , #upd-desc').classList.add('swal2-inputerror');
+    document.querySelector('#new-desc , #upd-desc').focus();
   } else {
     document.querySelector('#new-desc , #upd-desc').classList.remove('swal2-inputerror');
   }
@@ -3755,7 +3758,7 @@ function newValidate(title, desc, access) {
 
 
 function appendElement(data) {
-  var obj = "<div class='col-6 list-data px-2 py-2' id='data-ist-entry-' +data[ 'id']+ ''>\n\t\t\t    <div class='card border-0 bg-white border-grey border shadow' style='height:' ".concat(innerContentHeight, "px;'>\n\t\t\t        <div class='card-header bg-white pt-2 pb-2 px-3  clearfix'>\n\t\t\t            <div class='clearfix text-truncate\t'><small class='font-weight-bold text-grey  initial '>").concat(data['name'], "</small></div>\n\t\t\t        </div>\n\t\t\t        <div class='card-content h-100 d-flex justify-content-center align-items-center'>\n\t\t\t            <button class='button-entry bg-transparent border-0 shadow-none btn  p-0 ").concat(data['status'], "'  data-id='").concat(data['id'], "'><small class='on'>On</small><small class='off'>Off</small></button>\n\t\t\t        </div>\n\t\t\t        <div class='card-footer py-1 text-dark bg-white'>\n\t\t\t            <div class='row'>\n\t\t\t                <div class='col-4'>\n\t\t\t                    <button class='btn p-0 btn-block text-primary btn-view' data-id='").concat(data['id'], " '><i class='fa fa-eye'></i></button>\n\t\t\t                </div>\n\t\t\t                <div class='col-4'>\n\t\t\t                    <button class='btn p-0 btn-block text-warning btn-edit' data-id='").concat(data['id'], "' ><i class='fa fa-edit'></i></button>\n\t\t\t                </div>\n\t\t\t                <div class='col-4'>\n\t\t\t                    <button class='btn p-0 btn-block text-danger btn-delete' data-id='").concat(data['id'], "' ><i class='fa fa-trash'></i></button>\n\t\t\t                </div>\n\t\t\t            </div>\n\t\t\t        </div>\n\t\t\t    </div>\n\t\t\t</div>");
+  var obj = "<div class='col-6 list-data px-2 py-2' id='data-ist-entry-".concat(data['id'], "'>\n\t\t\t    <div class='card border-0 bg-white border-grey border shadow' style='height:' ").concat(innerContentHeight, "px;'>\n\t\t\t        <div class='card-header bg-white pt-2 pb-2 px-3  clearfix'>\n\t\t\t            <div class='clearfix text-truncate\t'><small class='font-weight-bold text-grey  initial '>").concat(data['name'], "</small></div>\n\t\t\t        </div>\n\t\t\t        <div class='card-content h-100 d-flex justify-content-center align-items-center'>\n\t\t\t            <button class='button-entry bg-transparent border-0 shadow-none btn  p-0 ").concat(data['status'], "'  data-id='").concat(data['id'], "'><small class='on'>On</small><small class='off'>Off</small></button>\n\t\t\t        </div>\n\t\t\t        <div class='card-footer py-1 text-dark bg-white'>\n\t\t\t            <div class='row'>\n\t\t\t                <div class='col-4'>\n\t\t\t                    <button class='btn p-0 btn-block text-primary btn-view' data-id='").concat(data['id'], " '><i class='fa fa-eye'></i></button>\n\t\t\t                </div>\n\t\t\t                <div class='col-4'>\n\t\t\t                    <button class='btn p-0 btn-block text-warning btn-edit' data-id='").concat(data['id'], "' ><i class='fa fa-edit'></i></button>\n\t\t\t                </div>\n\t\t\t                <div class='col-4'>\n\t\t\t                    <button class='btn p-0 btn-block text-danger btn-delete' data-id='").concat(data['id'], "' ><i class='fa fa-trash'></i></button>\n\t\t\t                </div>\n\t\t\t            </div>\n\t\t\t        </div>\n\t\t\t    </div>\n\t\t\t</div>");
   document.querySelector('.list-parent').insertAdjacentHTML('beforeend', obj);
   callEntry();
 } // submiting new data
@@ -3872,6 +3875,7 @@ function callEntry() {
         });
       })["catch"](function (err) {
         sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.close();
+        console.log(err);
         failAlert(err.toString());
       });
     });
@@ -3889,6 +3893,7 @@ function callEntry() {
         cancelButtonColor: 'var(--danger)',
         confirmButtonColor: 'var(--info)'
       }).then(function (result) {
+        if (result['dismiss'] == 'cancel') return false;
         _utils__WEBPACK_IMPORTED_MODULE_1__["default"].postData('/delete', {
           id: item.getAttribute('data-id')
         }).then(function (result) {
@@ -3927,6 +3932,7 @@ function update(id) {
       subject.querySelector('.initial').textContent = title;
       successAlert('Success Update Protocol');
     })["catch"](function (err) {
+      console.log(err);
       failAlert(err.toString());
     });
   }
