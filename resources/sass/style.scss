@@ -1,3 +1,4 @@
+
 @import "_plugins/variabel";
 * {
 	box-shadow:none !important;
@@ -287,4 +288,71 @@ main {
 }
 button {
 	cursor: pointer;
+}
+main.card {
+	max-width: 420px;
+}
+
+.main.blank {
+	height: calc(100vh - 30px);
+}
+.text-sm {
+	font-size: 13px;
+}
+.block-scope {
+	height: 33px;
+	background-color: var(--warning);
+	.c {
+		display: none;
+	}
+	&.connect {
+		background-color: var(--primary) !important;
+		.c {
+			display: block !important;
+		}
+		.dc {
+			display: none;
+		}
+	}
+	.block-data {
+		max-width: 0px;
+		overflow: hidden;
+		transition: .3s ease;
+	}
+	&.expand {
+		.block-data {
+			max-width: 200px;
+		}
+	}
+}
+.f-as {
+	font-size: 19px;
+}
+#main-action-content {
+	height: calc(100vh - 90px) !important;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	a {
+		height: 40px;
+		flex-direction: column;
+		justify-content: center;
+		align-content: center;
+		justify-content: center;
+		display: flex;
+		position: relative;
+		&.active:after {
+			content: "";
+			height: 3px;
+			width: 100%;
+			top: 0;
+			left: 0;
+			background-color:var(--white);
+			position: absolute;
+		}
+	}
 }

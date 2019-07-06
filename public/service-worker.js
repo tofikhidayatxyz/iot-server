@@ -4,7 +4,7 @@ const cacheName = 'static-cache-v1';
 
 
 const files = [
-  '/',
+  //'/',
   '/favicon.ico',
   '/manifest.json',
   '/css/style.css',
@@ -17,11 +17,11 @@ const files = [
   '/images/icons/icon-192x192.png',
   '/images/icons/icon-384x384.png',
   '/images/icons/icon-512x512.png',
-  '/fonts/vendor/line-awesome/line-awesome.eot' ,
-  '/fonts/vendor/line-awesome/line-awesome.svg' ,
-  '/fonts/vendor/line-awesome/line-awesome.ttf' ,
-  '/fonts/vendor/line-awesome/line-awesome.woff' ,
-  '/fonts/vendor/line-awesome/line-awesome.woff2',
+  '/fonts/line-awesome.eot' ,
+  '/fonts/line-awesome.svg' ,
+  '/fonts/line-awesome.ttf' ,
+  '/fonts/line-awesome.woff' ,
+  '/fonts/line-awesome.woff2',
 ];
 
 

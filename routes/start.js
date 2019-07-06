@@ -1,23 +1,33 @@
-var express = require('express');
-var router = express.Router();
-/* GET home page. */
-router.get('/', function (req, res, next) {
-	db.query("SELECT * FROM client", function (err, results, fields) {
-		if (err) throw err;
-		var client = results;
-		db.query("SELECT * FROM status", function (err, result, fields) {
-			if (err) throw err;
-			data = {
-				"client": client,
-				"status": result,
-			}
-			res.render('remote', {
-				env: process.env,
-				data: JSON.parse(JSON.stringify(data))['client'],
-				req:req
-			});
-			//console.log(JSON.parse(JSON.stringify(data))['client'])
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const combine  =  JSON.stringify([process.env.USER_NAME,process.env.USER_PASS]);
+
+function validate(hash) {
+	return new Promise((resolve,reject)=>{
+		bcrypt.compare(combine,hash,(err,hash)=>{
+			resolve(hash);
 		})
 	})
+}
+
+
+/* GET home page. */
+router.get('/', async function (req, res, next) {
+	let stat  =  await validate(req.cookies.auth);
+	if (req.cookies && stat) {
+		//return res.send(stat)
+		db.query("SELECT * FROM client",async function (err, results, fields) {
+			if (err) throw err;
+			return await res.render('remote', {
+				env: process.env,
+				data: JSON.parse(JSON.stringify(results)),
+				req:req
+			});
+		})
+	} else {
+		return res.redirect('/login');
+	}
 });
 module.exports = router;

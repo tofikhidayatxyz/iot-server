@@ -4,7 +4,7 @@ let interval  = 0;
 let status;
 
 setInterval(function(data){
-	var date  =   moment().subtract(process.env.SCHEDULE,'seconds').format('YYYY-MM-DD hh:mm:ss');
+	var date  =   moment().subtract(process.env.INTERVAL,'seconds').format('YYYY-MM-DD hh:mm:ss');
 	db.query("SELECT  * from status LIMIT 1",function(err,results,fields){
 		if(err) throw err;
 		var results =  JSON.parse(JSON.stringify(results))[0].accessed_at;
@@ -13,8 +13,8 @@ setInterval(function(data){
 		} else {
 			status =  "connected";
 		}
-		///console.log(status)
-		db.query("UPDATE status SET client='"+status+"'",function(err,results,fields){
+		console.log(status)
+		db.query(`UPDATE status SET client="${status}"`,function(err,results,fields){
 			if(err) throw err;
 			///console.log("succesed ...");
 		})

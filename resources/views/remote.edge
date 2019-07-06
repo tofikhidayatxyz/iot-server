@@ -1,6 +1,41 @@
 @layout('layouts/app')
 @section('content')
 <div id="conntent-main" class="bg-secondary  pb-5">
+	<div class="w-100  pt-2 px-2 justify-content-center d-flex">
+		<div class="mr-auto">
+			<div class="block-scope rounded  shadow d-flex justify-content-center align-items-center px-2  float-left" id="internet">
+				<div class="block-name">
+					<i class="fa fa-signal text-white"></i>
+				</div>
+				<div class="block-data float-left  text-white">
+					<p class="ml-1 mb-0 w-100 text-truncate c">Internet connected</p>
+					<p class="ml-1 mb-0 w-100 text-truncate dc">Internet disconnect</p>
+				</div>
+			</div>
+			<div class="block-scope rounded  shadow d-flex justify-content-center align-items-center px-2  float-left ml-2" id="server">
+				<div class="block-name">
+					<i class="fa fa-server text-white"></i>
+				</div>
+				<div class="block-data float-left  text-white">
+					<p class="ml-1 mb-0 w-100 text-truncate c">Server connected</p>
+					<p class="ml-1 mb-0 w-100 text-truncate dc ">Server disconnect</p>
+				</div>
+			</div>
+			<div class="block-scope rounded  shadow d-flex justify-content-center align-items-center px-2   float-left ml-2" id="client">
+				<div class="block-name">
+					<i class="fa fa-rotate-left text-white"></i>
+				</div>
+				<div class="block-data float-left  text-white">
+					<p class="ml-1 mb-0 w-100 text-truncate c">Client connected</p>
+					<p class="ml-1 mb-0 w-100 text-truncate dc">Client disconnect</p>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-primary p-0 ml-auto pl-2 pr-3 py-1" id="plus">
+			<i class="fa fa-plus text-white float-left mt-1 text-sm"></i>
+			<p class="text-white mb-0 ml-1 float-left text-sm">Add</p>
+		</button>
+	</div>
 	<div class="search-object pt-2 px-2 clearfix">
 		<form action="#" method="get" class="form-search-object bg-white shadow clearfix rounded">
 			<input type="text" name="key" class="float-left border-0  shadow-none form-control bg-transparent " placeholder="Search ... " value="{{(req.param('key') ? req.param('key') : "")}}">

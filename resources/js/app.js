@@ -84,14 +84,24 @@ document.querySelector('#plus').addEventListener('click',function(event) {
 	  	confirmButtonColor: 'var(--primary)',
 		cancelButtonColor: 'var(--danger)',
 		preConfirm: function() {
-			return false;
+			//return false;
 		  return submitNewData()
 		}
 	})
-	setTimeout(function(args) {
-		document.querySelector('#plus').classList.remove('expand');
-	}, 1000)
 });
+
+// scope
+document.querySelectorAll('.block-scope').forEach((item)=>{
+	item.addEventListener('click',function(e){
+		document.querySelectorAll('.block-scope').forEach((items)=>{ 
+			if (items != item ) {
+				items.classList.remove('expand');
+			}
+		})
+		item.classList.toggle('expand')
+	})
+})
+
 
 
 // validating
@@ -177,7 +187,7 @@ function submitNewData() {
 				  type: 'success',
 				  confirmButtonColor: 'var(--success)'
 			})
-			appendElement(result[0]);
+			//appendElement(result[0]);
 		})
 		.catch((err)=>{
 			Swal.close();
@@ -402,50 +412,20 @@ setInterval(function(e){
 		}
 		arr.push(inobj);
 	}
+	// check is is offline
+	if (window.navigator.onLine) {
+		document.querySelector("#internet").classList.add("connect")
+	} else {
+		document.querySelector("#internet").classList.remove("connect")
+	}
+
 	util.getData('/view/all',{})
 		.then((result)=>{
-				document.querySelector("#net-button").classList.remove('bg-danger')
-				document.querySelector("#net-button").classList.add('bg-success')
-				document.querySelector("#net-button").classList.add('bg-success')
-				document.querySelector("#net-button").classList.remove('bg-danger')
-
-				document.querySelector("#stat-net").classList.add('alert-success')
-				document.querySelector("#stat-net").classList.remove('alert-danger')
-				document.querySelector("#stat-net-text").classList.add('text-success')
-				document.querySelector("#stat-net-text").classList.remove('text-danger')
-				document.querySelector("#stat-net-text").textContent = "Connected to internet";
-				document.querySelector("#stat-net-button").classList.add('text-success')
-				document.querySelector("#stat-net-button").classList.remove('text-danger')
-
+		    document.querySelector("#server").classList.add("connect")
 			if (result['status'][0]['client'] == 'disconnect') {
-				document.querySelector("#client-button").classList.add('bg-danger')
-				document.querySelector("#client-button").classList.remove('bg-success')
-				document.querySelector("#client-button").classList.remove('bg-success')
-				document.querySelector("#client-button").classList.add('bg-danger')
-
-				document.querySelector("#stat-client").classList.remove('alert-success')
-				document.querySelector("#stat-client").classList.add('alert-danger')
-				document.querySelector("#stat-client-text").classList.remove('text-success')
-				document.querySelector("#stat-client-text").classList.add('text-danger')
-				document.querySelector("#stat-client-text").textContent = "Client disconnected";
-				document.querySelector("#stat-client-button").classList.remove('text-success')
-				document.querySelector("#stat-client-button").classList.add('text-danger')
-
+				document.querySelector("#client").classList.remove("connect");
 			} else {
-				document.querySelector("#client-button").classList.remove('bg-danger')
-				document.querySelector("#client-button").classList.add('bg-success')
-				document.querySelector("#client-button").classList.add('bg-success')
-				document.querySelector("#client-button").classList.remove('bg-danger')
-
-				document.querySelector("#stat-client").classList.add('alert-success')
-				document.querySelector("#stat-client").classList.remove('alert-danger')
-				document.querySelector("#stat-client-text").classList.add('text-success')
-				document.querySelector("#stat-client-text").classList.remove('text-danger')
-				document.querySelector("#stat-client-text").textContent = "Client connected";
-				document.querySelector("#stat-client-button").classList.add('text-success')
-				document.querySelector("#stat-client-button").classList.remove('text-danger')
-
-
+				document.querySelector("#client").classList.add("connect");
 			}
 			var client  =  result['client'];
 			for (var i = 0; i < client.length; i++) {
@@ -470,26 +450,7 @@ setInterval(function(e){
 			}
 			filtrator(arr,client);
 		}).catch((err)=>{
-			document.querySelector("#stat-net").classList.remove('alert-success')
-			document.querySelector("#stat-net").classList.add('alert-danger')
-			document.querySelector("#stat-net-text").classList.remove('text-success')
-			document.querySelector("#stat-net-text").classList.add('text-danger')
-			document.querySelector("#stat-net-text").textContent = "No internet connection";
-			document.querySelector("#stat-net-button").classList.remove('text-success')
-			document.querySelector("#stat-net-button").classList.add('text-danger')
-
-			document.querySelector("#stat-client").classList.remove('alert-success')
-			document.querySelector("#stat-client").classList.add('alert-danger')
-			document.querySelector("#stat-client-text").classList.remove('text-success')
-			document.querySelector("#stat-client-text").classList.add('text-danger')
-			document.querySelector("#stat-client-text").textContent = "Client disconnected";
-			document.querySelector("#stat-client-button").classList.remove('text-success')
-			document.querySelector("#stat-client-button").classList.add('text-danger')
-
-			document.querySelector("#net-button").classList.add('bg-danger')
-			document.querySelector("#net-button").classList.remove('bg-success')
-			document.querySelector("#net-button").classList.remove('bg-success')
-			document.querySelector("#net-button").classList.add('bg-danger')
+			document.querySelector("#server").classList.remove("connect")
 			console.log(err);
 		})
 },1000)
@@ -527,27 +488,3 @@ function searchData(data) {
 	}
 
 }
-
-
-// notif
-
-document.querySelector("#net-button").addEventListener('click',(e)=>{
-	document.querySelector('#stat-net').classList.toggle('hide');
-	setTimeout(()=>{
-		document.querySelector('#stat-net').classList.add('hide');
-	},5000)
-})
-document.querySelector("#stat-net-button").addEventListener('click',(e)=>{
-	document.querySelector('#stat-net').classList.add('hide');
-})
-
-document.querySelector("#client-button").addEventListener('click',(e)=>{
-	document.querySelector('#stat-client').classList.toggle('hide');
-	setTimeout(()=>{
-		document.querySelector('#stat-client').classList.add('hide');
-	},5000)
-})
-document.querySelector("#stat-client-button").addEventListener('click',(e)=>{
-	document.querySelector('#stat-client').classList.add('hide');
-})
-

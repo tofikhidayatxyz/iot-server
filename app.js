@@ -6,8 +6,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mysql = require("mysql");
 const compression = require('compression')
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
 const app = express();
 const minifyHTML = require('express-minify-html');
 
@@ -32,6 +30,7 @@ app.use(function(req, res, next) {
    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
    res.header('Access-Control-Allow-Credentials', true);
    res.removeHeader("X-Powered-By");
+   res.set('Cache-Control', 'public, max-age=31557600, s-maxage=31557600');
    next();
 });
 // minify
@@ -68,12 +67,9 @@ app.use('/create', require('./routes/create'));
 app.use('/delete',require('./routes/delete'));
 app.use('/edit',require('./routes/edit'));
 app.use('/view/',require('./routes/view'));
-//app.use('/update',require('./routes/update'));
-//app.use('/status',require('./routes/status'));
+app.use('/login',require('./routes/login'));
 app.use('/api',require('./routes/api'));
-// beta api version
-//app.use('/beta',require('./routes/beta'));
-/* ========= save */
+
 /* ============ end routing ==================*/
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

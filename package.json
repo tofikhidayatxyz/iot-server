@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "iot-server",
   "version": "0.0.0",
   "private": false,
   "scripts": {
@@ -15,6 +15,7 @@
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "debug": "~4.1.1",
@@ -40,5 +41,23 @@
     "sass": "^1.22.3",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
-  }
+  },
+  "description": "examle",
+  "main": "bin/www",
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tofikhidayat/iot-server.git"
+  },
+  "keywords": [
+    "iot"
+  ],
+  "author": "tofik hidayat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tofikhidayat/iot-server/issues"
+  },
+  "homepage": "https://github.com/tofikhidayat/iot-server#readme"
 }
