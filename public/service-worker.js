@@ -43,8 +43,8 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.includes('view/all')) return false;
-  console.info(event.request.url);
+  if (event.request.url.includes('view/all') || event.request.url.includes('/create/save') || event.request.url.includes('/edit/update') || event.request.url.includes('/edit/switch') || event.request.url.includes('/view') || event.request.url.includes('/delete') ) return false;
+  //console.info(event.request.url);
   var request = event.request;
   event.respondWith(
     caches.match(request).then((response) => {
