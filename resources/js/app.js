@@ -60,8 +60,20 @@ function loadingAlert() {
 	});
 }
 
-document.querySelector('#plus').addEventListener('click',function(event) {
-	this.classList.add('expand');
+function loading() {
+	document.getElementById('loading').classList.add('active');
+}
+function loadingStop() {
+	document.getElementById('loading').classList.remove('active');
+}
+
+function clear() {
+	document.querySelectorAll(".swal2-confirm ,  .swal2-cancel").forEach( (i)=> {
+		i.removeAttribute('disabled');
+	});
+}
+
+document.querySelector('#plus').addEventListener('click',async function(event) {
 	Swal.fire({
 		title:'Add New Controller',
 	 	html:`
@@ -83,9 +95,11 @@ document.querySelector('#plus').addEventListener('click',function(event) {
 	  	cancelButtonText: 'Cancel',
 	  	confirmButtonColor: 'var(--primary)',
 		cancelButtonColor: 'var(--danger)',
-		preConfirm: function() {
-			//return false;
-		  return submitNewData()
+		closeOnConfirm: false,	
+		preConfirm: async function() {
+		  loading()
+		  submitNewData()
+		  return false;
 		}
 	})
 });
@@ -167,38 +181,38 @@ function submitNewData() {
 	var new_title  =  document.querySelector('#new-label').value;
 	var new_desc   =  document.querySelector('#new-desc').value;
 	var new_access =  document.querySelector('#new-access').value;
-	if(newValidate(new_title,new_desc,new_access) == 0 ) {
-		Swal.close();
-		Swal.fire({
-		  title: 'Wait a Minute... ',
-		  onBeforeOpen: () => {
-		    Swal.showLoading()
-		  },
-		 allowOutsideClick: false ,
-		});
-		// post data 
-		util.postData('/create/save',{ 
-			name:new_title,
-			access:new_access,
-			description:new_desc })
-		.then((result)=>{
-			Swal.fire({
-				  title: 'Succesed Adding new Protocol',
-				  type: 'success',
-				  confirmButtonColor: 'var(--success)'
-			})
-			//appendElement(result[0]);
-		})
-		.catch((err)=>{
+		if(newValidate(new_title,new_desc,new_access) == 0 ) {
 			Swal.close();
 			Swal.fire({
-				  title: 'Error Adding new Protocol',
-				  type: 'error',
-				  text:err,
-				  confirmButtonColor: 'var(--success)'
+			  title: 'Wait a Minute... ',
+			  onBeforeOpen: () => {
+			    Swal.showLoading()
+			  },
+			 allowOutsideClick: false ,
+			});
+			// post data 
+			util.postData('/create/save',{ 
+				name:new_title,
+				access:new_access,
+				description:new_desc })
+			.then((result)=>{
+				Swal.fire({
+					  title: 'Succesed Adding new Protocol',
+					  type: 'success',
+					  confirmButtonColor: 'var(--success)'
+				})
 			})
-		})
-	}	
+			.catch((err)=>{
+				Swal.close();
+				Swal.fire({
+					  title: 'Error Adding new Protocol',
+					  type: 'error',
+					  text:err,
+					  confirmButtonColor: 'var(--success)'
+				})
+			})
+		}
+		loadingStop();
 }
 
 
@@ -220,6 +234,9 @@ function callEntry() {
 	// switch
 	document.querySelectorAll('.button-entry').forEach((item)=>{
 		item.addEventListener('click',()=>{
+			//loading();
+			document.querySelector('.loader-line').style.width = '50%';
+
 			util.postData('/edit/switch',{
 				id:item.getAttribute('data-id'),
 				status:item.classList.contains('on') == true ? 'off' : 'on'
@@ -231,7 +248,15 @@ function callEntry() {
 					item.classList.remove('off')
 					item.classList.add('on')
 				}
+				document.querySelector('.loader-line').style.width = '100%';
+				setTimeout(()=>{
+					document.querySelector('.loader-line').style.width = '0%';
+				},200)
 			}).catch((err)=>{
+				document.querySelector('.loader-line').style.width = '100%';
+				setTimeout(()=>{
+					document.querySelector('.loader-line').style.width = '0%';
+				},200)
 				failAlert(err.toString());
 			})
 		})
@@ -239,9 +264,11 @@ function callEntry() {
 	// view
 	document.querySelectorAll('.btn-view').forEach((item)=>{
 		item.addEventListener('click',()=>{
+			loading()
 			util.postData('/view',{
 				id:item.getAttribute('data-id')
 			}).then((data)=>{
+				loadingStop()
 				Swal.close();
 					Swal.fire({
 					title:'Controller Data',
@@ -268,6 +295,7 @@ function callEntry() {
 				  	confirmButtonColor: 'var(--info)',
 				})
 			}).catch((err)=>{
+				loadingStop()
 				Swal.close();
 				failAlert(err.toString());
 			})
@@ -276,9 +304,11 @@ function callEntry() {
 	//edit
 	document.querySelectorAll('.btn-edit').forEach((item)=>{
 		item.addEventListener('click',()=>{
+			loading()
 			util.postData('/view',{
 				id:item.getAttribute('data-id')
 			}).then((data)=>{
+				loadingStop()
 				Swal.close();
 					Swal.fire({
 					title:'Edit Controller',
@@ -304,20 +334,23 @@ function callEntry() {
 				  	confirmButtonColor: 'var(--primary)',
 					cancelButtonColor: 'var(--danger)',
 					preConfirm: function() {
-					  return update(item.getAttribute('data-id'));
+					  loading()
+					  update(item.getAttribute('data-id'));
+					  return  false;
 					}
 				})
 			}).catch((err)=>{
+				loadingStop()
 				Swal.close();
 				console.log(err)
-				failAlert(err.toString());
+				failAlert(err.toString());	
 			})
 		})
 	})
 	// delete
 	document.querySelectorAll('.btn-delete').forEach((item)=>{
 		item.addEventListener('click',()=>{
-			loadingAlert();
+			//loadingAlert();
 			Swal.fire({
 				title:'Confirmation',
 				text:'Are you sure you want to delete this?',
@@ -328,12 +361,16 @@ function callEntry() {
 				confirmButtonColor: 'var(--info)',
 				}).then((result) => {
 					if (result['dismiss'] == 'cancel') return false; 
+					loading()
 					util.postData('/delete',{id:item.getAttribute('data-id')})
 						.then((result)=>{
  							document.querySelector('.list-parent').removeChild(item.closest('.col-6'));
+ 							loadingStop()
 						}).catch((err)=>{
+							loadingStop()
 							failAlert(err.toString());
 						})
+						
 				});
 		})
 	})
@@ -371,6 +408,7 @@ function update(id) {
 			failAlert(err.toString());
 		});
 	}
+	loadingStop();
 }
 
 
@@ -383,7 +421,8 @@ function filtrator(dom,db) {
 		   for (var j = 0; j < checker.length; j++) {
 		   		if (dom[i]['id'].toString() == checker[j].toString()) {
 		   			var target = dom[i].crono;
-		   			document.querySelector('#'+target).parentNode.removeChild('#'+target);
+		   			let env = document.querySelector('#'+target); 
+		   			env.parentNode.removeChild(env);
 		   		}
 		   }
 		}

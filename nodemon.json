@@ -2,9 +2,8 @@
   "restartable": "rs",
   "ignore": [
     ".git",
-    "node_modules",
-    "views",
-    "resources"
+    "./node_modules",
+    "./resources"
   ],
    "watch": [
     "./",

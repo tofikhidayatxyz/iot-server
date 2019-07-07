@@ -2,9 +2,8 @@ var express = require('express');
 var router = express.Router();
 var moment  =  require('moment');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  var power  = req.param("power"); 
-  var date  =  moment().format('YYYY-MM-DD hh:mm:ss');
+router.get('/', function(req, res, next) { 
+  var date  =  moment().format('YYYY-MM-DD HH:mm:ss');
 
   db.query("UPDATE status SET accessed_at='"+date+"' ",function(err,results,fields){
       if(err) throw err;

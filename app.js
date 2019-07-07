@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
    res.header('Access-Control-Allow-Credentials', true);
    res.removeHeader("X-Powered-By");
-   res.set('Cache-Control', 'public, max-age=31557600, s-maxage=31557600');
+   ////res.set('Cache-Control', 'public, max-age=31557600, s-maxage=31557600');
    next();
 });
 // minify
@@ -63,6 +63,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /* ============ routing =========*/
 //app.use('/users', usersRouter);
 app.use('/', require('./routes/start'));
+app.use('/schedule', require('./routes/schedule'));
 app.use('/create', require('./routes/create'));
 app.use('/delete',require('./routes/delete'));
 app.use('/edit',require('./routes/edit'));

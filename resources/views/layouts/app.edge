@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<title>{{env.APP_NAME}}</title>
@@ -33,6 +33,7 @@
 					<div class="header-plus float-left ">
 						<a class="btn fa fa-sign-out text-white  pl-0 f-as " href="/login/exit"></a>
 					</div>
+					<div class="loader-line"></div>
 				</header>
 				<main class="w-100 h-100 d-block bg-secondary" id="main-action-content">
 					@!section('content')
@@ -46,10 +47,16 @@
 					</div>
 				</div>
 			</div>
+			<div class="loading " id="loading">
+				<div class="loading-bar">
+					<img src="/images/loading.svg" alt="">
+				</div>
+			</div>
 		</body>
 		<!-- load javascript file -->
 		<script type="text/javascript" src="/js/app.js"></script>
 		<script type="text/javascript">
+			/*
 			if ('serviceWorker' in navigator) {
 			  window.addEventListener('load', () => {
 			    navigator.serviceWorker.register('/service-worker.js')
@@ -58,5 +65,6 @@
 			        });
 			  });
 			}
+			*/
 		</script>
 	</html>

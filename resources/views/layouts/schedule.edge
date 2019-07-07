@@ -23,14 +23,37 @@
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
 	</head>
 		<body class="bg-secondary " id="content">
-			<div class="main blank p-3 d-flex justify-content-center flex-column">
-				<main class="w-100  mt-0 d-block card shadow border-0  rounded overflow-hidden mx-auto">
+			<div class="main" id="main-content">
+				<header id="header" class="bg-primary px-2 clearfix">
+					<div class="mr-auto ">
+					</div>
+					<div class="header-text float-left ml-auto">
+						<h5 class="text-center mb-0 text-white font-weight-normal">{{env.APP_TITLE}}</h5>
+					</div>
+					<div class="header-plus float-left ">
+						<a class="btn fa fa-sign-out text-white  pl-0 f-as " href="/login/exit"></a>
+					</div>
+				</header>
+				<main class="w-100 h-100 d-block bg-secondary" id="main-action-content">
 					@!section('content')
 				</main>
+				<div class="footer bg-primary row px-0 mx-0 w-100">
+					<div class="col-6 px-0">
+						<a class="w-100 text-center text-white text-decoration-none " href="/">Control</a>
+					</div>
+					<div class="col-6 px-0">
+						<a class="w-100 text-center text-white text-decoration-none active"  href="/schedule">Schedule</a>
+					</div>
+				</div>
+			</div>
+			<div class="loading " id="loading">
+				<div class="loading-bar">
+					<img src="/images/loading.svg" alt="">
+				</div>
 			</div>
 		</body>
 		<!-- load javascript file -->
-		<script type="text/javascript" src="/js/login.js"></script>	
+		<script type="text/javascript" src="/js/schedule.js"></script>
 		<script type="text/javascript">
 			/*
 			if ('serviceWorker' in navigator) {
@@ -40,6 +63,7 @@
 			          console.log('Service worker registered.', reg);
 			        });
 			  });
-			}*/
+			}
+			*/
 		</script>
 	</html>
