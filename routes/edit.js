@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router();
 /* GET home page. */
 router.get('/:id', function(req, res, next) {
-  id  =  req.param('id');
+  var id  =  req.param('id');
   db.query("SELECT * FROM client WHERE id="+id,function(err,results,fields){
   	if(err) {
   		console.log(err);

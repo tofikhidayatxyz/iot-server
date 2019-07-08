@@ -23,14 +23,10 @@ router.get('/all', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  id  =  req.param('id');
+  let id  =  req.param('id');
   db.query('SELECT * FROM client WHERE id='+id,function(err,results,fields){
-  	if(err) {
-  		console.log(err);
-  		res.send(err);
-  	} else {
-  		res.send(results);
-  	}
+  	if(err)  throw err;
+  	return res.send(results);
   })
   
 });
