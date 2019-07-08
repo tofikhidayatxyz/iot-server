@@ -1,6 +1,6 @@
 {
-  "name": "Iot server",
-  "short_name": "Iot server",
+  "name": "Home control",
+  "short_name": "Hoc",
   "theme_color": "#28c3d4",
   "background_color": "#28c3d4",
   "display": "standalone",
