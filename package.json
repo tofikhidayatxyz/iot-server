@@ -54,7 +54,11 @@
   "keywords": [
     "iot"
   ],
-  "author": "tofik hidayat",
+  "author": {
+    "name":"tofik hidayat",
+    "email":"tofik@syntac.co.id",
+    "url":"tofikhidayat.xyz"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tofikhidayat/iot-server/issues"
