@@ -1,5 +1,5 @@
 'use strict'
-const moment =  require('moment');
+const moment =  require('moment-timezone');
 let status;
 let last_stat = "disconnect";
 
@@ -28,7 +28,7 @@ setInterval(function(data){
 	})
 
 	// schedule selector
-	let time  = moment().format('HH:mm')
+	let time  = moment().tz(process.env.TIMEZONE).format('HH:mm')
 	console.log(time)
 	db.query(`SELECT * FROM client INNER JOIN schedule ON schedule.client_id = client.id   WHERE schedule.time = "${time}"`,(err,results,fields)=>{
 		if (err) return console.log(err);

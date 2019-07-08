@@ -26,7 +26,7 @@
     "express-minify-html": "^0.12.0",
     "fs": "0.0.2",
     "http-errors": "^1.7.3",
-    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.26",
     "morgan": "~1.9.1",
     "mysql": "^2.17.1",
     "sweetalert2": "^8.13.1"
@@ -55,9 +55,9 @@
     "iot"
   ],
   "author": {
-    "name":"tofik hidayat",
-    "email":"tofik@syntac.co.id",
-    "url":"tofikhidayat.xyz"
+    "name": "tofik hidayat",
+    "email": "tofik@syntac.co.id",
+    "url": "tofikhidayat.xyz"
   },
   "license": "MIT",
   "bugs": {
