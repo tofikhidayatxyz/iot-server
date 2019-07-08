@@ -21,9 +21,6 @@ const url =  ['/create/save',
 
 
 const files = [
-  '/',
-  '/login',
-  '/schedule',
   '/favicon.ico',
   '/manifest.json',
   '/css/style.css',
