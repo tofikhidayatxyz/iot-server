@@ -9,7 +9,6 @@
 		<link rel="manifest" href="/manifest.json">
 		<meta name="keywords" content="iot">
 		<meta name="author" content="tofik hidayat">
-		<link rel="manifest" href="/manifest.json">
 		<link rel="icon" href="/favicon.ico" color="#28c3d4">
 		<meta name="theme-color" content="#28c3d4">
 		<meta property="fb:app_id" content="1234567890">
@@ -54,16 +53,5 @@
 		</body>
 		<!-- load javascript file -->
 		<script type="text/javascript" src="/js/schedule.js"></script>
-		<script type="text/javascript">
-			/*
-			if ('serviceWorker' in navigator) {
-			  window.addEventListener('load', () => {
-			    navigator.serviceWorker.register('/service-worker.js')
-			        .then((reg) => {
-			          console.log('Service worker registered.', reg);
-			        });
-			  });
-			}
-			*/
-		</script>
+		@include('layouts.worker')
 	</html>

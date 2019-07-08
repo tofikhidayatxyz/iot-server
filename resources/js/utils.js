@@ -1,3 +1,16 @@
+'use strict'
+/// validate
+try {
+  let cookie  = document.cookie.split('=');
+   if (cookie[0] != 'auth' && !cookie[1]) {
+     window.location.href = '/login';
+   }
+} catch(e) {
+  console.log(e);
+}
+
+
+
 function checker(val1,val2) {
   var check = [] // from val1
   var data  = [] // from val2

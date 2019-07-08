@@ -19,7 +19,7 @@ setInterval(function(data){
 		} else {
 			return false;
 		}
-		console.log(status)
+		if (process.env.DEBUG == 'true')  console.log(status)
 		
 		db.query(`UPDATE status SET client="${status}"`,function(err,results,fields){
 			if(err) throw err;
@@ -32,6 +32,7 @@ setInterval(function(data){
 	///console.log(time)
 	db.query(`SELECT * FROM client INNER JOIN schedule ON schedule.client_id = client.id   WHERE schedule.time = "${time}"`,(err,results,fields)=>{
 		if (err) return console.log(err);
+		if (process.env.DEBUG == 'true')  console.log(status)
 		let qr = JSON.parse(JSON.stringify(results));
 		qr.forEach((key)=> {
 			if (key['action'] == key['status'] ) return false;
