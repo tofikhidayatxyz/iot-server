@@ -29,7 +29,7 @@ setInterval(function(data){
 
 	// schedule selector
 	let time  = moment().tz(process.env.TIMEZONE).format('HH:mm')
-	console.log(time)
+	///console.log(time)
 	db.query(`SELECT * FROM client INNER JOIN schedule ON schedule.client_id = client.id   WHERE schedule.time = "${time}"`,(err,results,fields)=>{
 		if (err) return console.log(err);
 		let qr = JSON.parse(JSON.stringify(results));
