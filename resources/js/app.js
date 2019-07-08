@@ -3,6 +3,7 @@
 import Swal from 'sweetalert2'
 import util from './utils';
 let innerContentHeight  = 0;
+let last_append = '';
 
 
 
@@ -170,6 +171,8 @@ function appendElement(data) {
 			        </div>
 			    </div>
 			</div>`;
+	if (last_append == obj) return false;
+		last_append =  obj;
 	document.querySelector('.list-parent').insertAdjacentHTML('beforeend',obj);
 	callEntry();
 }

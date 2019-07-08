@@ -1,6 +1,8 @@
 'use strict'
 import Swal from 'sweetalert2'
 import util from './utils';
+let  last_append = '';
+
 (()=>{
 
 	callEntry()
@@ -137,6 +139,8 @@ function appendElement(data) {
 					</button>
 				</div>
 			</div>`;
+	if (last_append == obj) return false;
+		last_append =  obj;
 	document.querySelector('.list-parent').insertAdjacentHTML('beforeend',obj);
 	callEntry();
 }
@@ -148,7 +152,9 @@ function appendElement(data) {
 
 document.querySelector('#plus').addEventListener('click',function(event) {
 	///loadingAlert()
+	loading();
 	util.getData('/view/all',{}).then((result)=>{
+		loadingStop();
 		result =  result['client'];
 		Swal.close();
 		let client  = '';
@@ -314,7 +320,7 @@ function callEntry() {
 				text:'Are you sure you want to delete this?',
 				confirmButtonText: 'Ok',
 				showCancelButton: true,
-				ancelButtonText: 'Cancel',
+				cancelButtonText: 'Cancel',
 			    cancelButtonColor: 'var(--danger)',
 				confirmButtonColor: 'var(--info)',
 				}).then((result) => {
