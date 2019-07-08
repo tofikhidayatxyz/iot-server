@@ -16,7 +16,7 @@ router.get('/', async function (req, res, next) {
 	let stat  =  await validate(req.cookies.auth);
 	if (req.cookies && stat) {
 		//return res.send(stat)
-		db.query("SELECT schedule.time,schedule.id,schedule.action,client.name FROM  schedule INNER JOIN client ON client.id=schedule.client_id ",async function (err, results, fields) {
+		db.query("SELECT schedule.time,schedule.id,schedule.action,client.name FROM  schedule INNER JOIN client ON client.id=schedule.client_id   ORDER BY schedule.time ",async function (err, results, fields) {
 			if (err) throw err;
 			return await res.render('schedule', {
 				env: process.env,
@@ -67,7 +67,7 @@ router.post('/update',async(req,res,next)=>{
 	})
 })
 router.get('/all',(req,res,next)=>{
-	db.query(`SELECT schedule.time,schedule.id,schedule.action,client.name as target FROM  schedule INNER JOIN client ON client.id=schedule.client_id`,(err,results,fields)=>{
+	db.query(`SELECT schedule.time,schedule.id,schedule.action,client.name as target FROM  schedule INNER JOIN client ON client.id=schedule.client_id ORDER BY schedule.time`,(err,results,fields)=>{
 		if (err) throw err;
 		db.query('SELECT * from status',(err,result,field)=>{
 			if (err) throw err;
