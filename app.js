@@ -75,7 +75,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* ============ routing =========*/
-
+// this for api set
+app.use('/api', require('./routes/api'));
 // auth
 app.use('/login', require('./routes/login'));
 // midleware
@@ -94,7 +95,6 @@ app.use('/create', require('./routes/create'));
 app.use('/delete', require('./routes/delete'));
 app.use('/edit', require('./routes/edit'));
 app.use('/view/', require('./routes/view'));
-app.use('/api', require('./routes/api'));
 
 /* ============ end routing ==================*/
 // catch 404 and forward to error handler
