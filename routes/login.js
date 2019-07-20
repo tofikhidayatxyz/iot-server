@@ -27,7 +27,10 @@ router.post('/',async(req,res,next)=> {
 	let password  =  req.body.password;
 	let combine  =  JSON.stringify([username,password]);
 	if (username == process.env.USER_NAME && password == process.env.USER_PASS) {
-		res.cookie('auth',await hash(combine));
+		res.cookie('auth',await hash(combine),{
+		signed:true ,
+		maxAge:2400 * 60 * 60 * 1000,
+	});
 		return res.redirect('/');
 	}
 	return res.redirect('/login?stat=err');

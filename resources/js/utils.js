@@ -9,6 +9,25 @@ try {
   console.log(e);
 }
 
+// update worker
+
+document.getElementById('update-worker').addEventListener('click',()=>{
+
+    try {
+      caches.delete('static-cache-v1');
+    } catch(e) {}
+    window.location.reload() ;
+})
+
+document.getElementById('show-drop').addEventListener('click',()=>{
+  document.querySelector('.dropdown-v').classList.toggle('show');
+})
+
+document.querySelector('.dropdown-v').addEventListener('click',(event)=>{
+  even.preventDefault();
+  event.stopPropagation();
+})
+
 
 
 function checker(val1,val2) {
@@ -63,6 +82,9 @@ async function getData(url = '', data = {}) {
       .catch(err=>reject(err));
     });
 }
+
+
+
 
 
 

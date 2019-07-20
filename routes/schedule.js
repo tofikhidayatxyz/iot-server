@@ -5,15 +5,10 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
-    //return res.send(stat)
-    db.query("SELECT schedule.time,schedule.id,schedule.action,client.name FROM  schedule INNER JOIN client ON client.id=schedule.client_id   ORDER BY schedule.time ", async function(err, results, fields) {
-        if (err) throw err;
-        return await res.render('schedule', {
-            env: process.env,
-            data: JSON.parse(JSON.stringify(results)),
-            req: req
-        });
-    })
+    return await res.render('schedule', {
+        env: process.env,
+       req: req
+    });
 });
 
 /* add */
@@ -57,7 +52,8 @@ router.post('/update', async (req, res, next) => {
     })
 })
 router.get('/all', (req, res, next) => {
-    db.query(`SELECT schedule.time,schedule.id,schedule.action,client.name as target FROM  schedule INNER JOIN client ON client.id=schedule.client_id ORDER BY schedule.time`, (err, results, fields) => {
+    //ORDER BY schedule.time
+    db.query(`SELECT schedule.time,schedule.id,schedule.action,client.name as target FROM  schedule INNER JOIN client ON client.id=schedule.client_id `, (err, results, fields) => {
         if (err) throw err;
         db.query('SELECT * from status', (err, result, field) => {
             if (err) throw err;

@@ -36,10 +36,10 @@ function validate(hash) {
 }
 
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header('Access-Control-Allow-Credentials', true);
+    //res.header("Access-Control-Allow-Origin", "*");
+    //res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    //res.header('Access-Control-Allow-Credentials', true);
     res.removeHeader("X-Powered-By");
     ////res.set('Cache-Control', 'public, max-age=31557600, s-maxage=31557600');
     next();
@@ -71,7 +71,7 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: false
 }));
-app.use(cookieParser());
+app.use(cookieParser("M&*h[L#?|}_{p-)Q(nZs&^~|0N>"));
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* ============ routing =========*/
@@ -80,8 +80,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/login', require('./routes/login'));
 // midleware
 app.use(async (req, res, next) => {
-    let stat = await validate(req.cookies.auth);
-    if (req.cookies && stat) {
+    let stat = await validate(req.signedCookies.auth);
+    if (req.signedCookies && stat) {
         return next();
     }
     return res.redirect('/login');
