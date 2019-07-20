@@ -26,11 +26,19 @@ router.post('/',async(req,res,next)=> {
 	let username   = req.body.username;
 	let password  =  req.body.password;
 	let combine  =  JSON.stringify([username,password]);
-	if (username == process.env.USER_NAME && password == process.env.USER_PASS) {
-		res.cookie('auth',await hash(combine));
-		return res.redirect('/');
+	let fails = {};
+	if (username != process.env.USER_NAME) {
+		fails.username = 'Your username is incorrect'
 	}
-	return res.redirect('/login?stat=err');
+	if (password != process.env.USER_PASS) {
+		fails.password = 'Your password is incorrect'
+	}
+
+	if (JSON.stringify(fails) == '{}') {
+		res.cookie('auth',await hash(combine));
+		return res.send({'status':'success'});
+	}
+	return res.send({'status':'fail','fail':fails});
 })
 
 // logout

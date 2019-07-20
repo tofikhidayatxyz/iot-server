@@ -3,6 +3,7 @@ const moment =  require('moment-timezone');
 let status;
 let last_stat = "disconnect";
 
+return false;
 setInterval(function(data){
 	var date  =   moment().subtract(process.env.INTERVAL,'seconds').format('YYYY-MM-DD HH:mm:ss');
 	db.query("SELECT  * from status LIMIT 1",function(err,results,fields){

@@ -4,18 +4,19 @@
 
 #define ARRAY_SIZE(x) sizeof(x)/sizeof(x[0])
 
-char ssid[] = "syntac.co.id";
-char pass[] = "willy@syntac.co";  
-char host[] = "http://13.250.47.156:3030/api";
 
+
+char ssid[] = "Landroid Preview";
+char pass[] = "chaining99";  
+char host[] = "http://13.250.47.156:3000/api";
 
 /// relay pin 1
 const char*   relay_1  =  "relay_1";
 int pin_1  =  0;
 /// relay pin 2
 const char*  relay_2  =  "relay_2";
-int  pin_2  =  15;
-/// relay pin 3
+int  pin_2  =  12;
+/// relay pin 3   
 const char*  relay_3  =  "relay_3";
 int  pin_3  =  16;
 /// relay pin 4
@@ -29,15 +30,19 @@ const char*  relay_6  =  "relay_6";
 int pin_6  =  14;
 /// relay pin 7
 const char*  relay_7  =  "relay_7";
-int pin_7  =  12;
+int pin_7  =  2;
 /// relay pin 8
 const char* relay_8 = "relay_8";
 int pin_8  =  13;
 
+// define wifi
+
+
 
 void setup() {  
-
-  pinMode(3, OUTPUT);
+  // builtin
+  pinMode(LED_BUILTIN, OUTPUT);
+  // pin relay
   pinMode(pin_1, OUTPUT);
   pinMode(pin_2, OUTPUT);
   pinMode(pin_3, OUTPUT);
@@ -47,27 +52,36 @@ void setup() {
   pinMode(pin_7, OUTPUT);
   pinMode(pin_8, OUTPUT);
 
-  
   Serial.begin(115200);
+  Serial.println(" ");
   Serial.print("Connecting to ");
   Serial.println(ssid);
   WiFi.begin(ssid, pass);
+  
   while (WiFi.status() != WL_CONNECTED) {
+    digitalWrite(LED_BUILTIN, HIGH);
     delay(500);
-    Serial.print(".");
+    Serial.println("Trying to connect");
+    digitalWrite(LED_BUILTIN, LOW);
   }
-  Serial.println("Wi-Fi connected successfully");
+  Serial.println("Wi-Fi connected successfully");  
 }
 
-
-
-// the loo function runs over and over again forever
+// the loop function runs over and over again forever
 void loop() {
+
+  while(WiFi.status() != WL_CONNECTED) {
+      Serial.println("Reconnecting....");
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW);
+  }
+
   HTTPClient http;  //Declare an object of class HTTPClient
   http.begin(host); /// set this to your http server
   int httpCode = http.GET();
   if (httpCode > 0) {
-    //Serial.print(http.getString());//get string
+    Serial.print(http.getString());//get string
     DynamicJsonBuffer jsonBuffer; 
     JsonArray& root = jsonBuffer.parseArray(http.getString());
     if (!root.success()) {
@@ -81,9 +95,6 @@ void loop() {
       }
     }
   }
-  //digitalWrite(3, HIGH);
-  //delay(50);
-  //digitalWrite(3, LOW);
   delay(200);
 }
 
@@ -151,14 +162,13 @@ void getProcess(String access , String status ) {
         Serial.println("Pin 7 On");
      }
    } else if(access == relay_8) {
-     if(status == "host") {
+     if(status == "off") {
         digitalWrite(pin_8,HIGH);
         Serial.println("Pin 8 Off");
      } else {
         digitalWrite(pin_8,LOW);
         Serial.println("Pin 8 On");
      }
-   }
-
- // Serial.flush();
+   }  
+ Serial.flush();
 }

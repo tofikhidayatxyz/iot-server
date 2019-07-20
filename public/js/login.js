@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -835,10 +835,10 @@ try {
 
 /***/ }),
 
-/***/ "./resources/js/app.js":
-/*!*****************************!*\
-  !*** ./resources/js/app.js ***!
-  \*****************************/
+/***/ "./resources/js/login.js":
+/*!*******************************!*\
+  !*** ./resources/js/login.js ***!
+  \*******************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -848,23 +848,62 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/*
-let button = document.createElement('button')
-	button.textContent = "Hello"
-	button.classList.add('btn')
-	button.classList.add('btn-primary')
+document.getElementById('login').addEventListener('click', function (event) {
+  var name = document.getElementById('name');
+  var password = document.getElementById('password');
+  var fails = 0; // validate
 
-let dom = document.createElement('div')
-	dom.classList.add("demo");
-	dom.appendChild(button)
-	dom.insertAdjacentHTML('beforeend',"fuck")
+  if (name.value == '') {
+    fails += 1;
+    name.parentNode.classList.add('fail');
+    name.parentNode.querySelector('.fail').textContent = 'This field can not be empty';
+  } else {
+    name.parentNode.classList.remove('fail');
+  }
 
+  if (password.value == '') {
+    fails += 1;
+    password.parentNode.classList.add('fail');
+    password.parentNode.querySelector('.fail').textContent = 'This field can not be empty';
+  } else {
+    password.parentNode.classList.remove('fail');
+  }
 
-document.getElementById('demo').appendChild(dom)
+  if (fails > 0) return false;
+  _utils__WEBPACK_IMPORTED_MODULE_0__["default"].showLoading();
+  _utils__WEBPACK_IMPORTED_MODULE_0__["default"].postData('/login', {
+    username: name.value,
+    password: password.value
+  }).then(function (result) {
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].hideLoading();
 
+    if (result.status == 'success') {
+      window.location.href = '/';
+    }
 
+    if (result.status == 'fail') {
+      if (result.fail.username) {
+        name.parentNode.classList.add('fail');
+        name.parentNode.querySelector('.fail').textContent = result.fail.username;
+      } else {
+        name.parentNode.classList.remove('fail');
+      }
 
-*/
+      if (result.fail.password) {
+        password.parentNode.classList.add('fail');
+        password.parentNode.querySelector('.fail').textContent = result.fail.password;
+      } else {
+        password.parentNode.classList.remove('fail');
+      }
+    }
+  })["catch"](function (e) {
+    document.querySelector('.floating-alert').classList.add('show');
+    _utils__WEBPACK_IMPORTED_MODULE_0__["default"].hideLoading();
+    setTimeout(function () {
+      document.querySelector('.floating-alert').classList.remove('show');
+    }, 3000);
+  });
+});
 
 /***/ }),
 
@@ -1030,26 +1069,14 @@ function hideLoading() {
 
 /***/ }),
 
-/***/ "./resources/sass/style.scss":
-/*!***********************************!*\
-  !*** ./resources/sass/style.scss ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 0:
-/*!***************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/style.scss ***!
-  \***************************************************************/
+/***/ 1:
+/*!*************************************!*\
+  !*** multi ./resources/js/login.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /mnt/c/Project/iot-server/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /mnt/c/Project/iot-server/resources/sass/style.scss */"./resources/sass/style.scss");
+module.exports = __webpack_require__(/*! /mnt/c/Project/iot-server/resources/js/login.js */"./resources/js/login.js");
 
 
 /***/ })

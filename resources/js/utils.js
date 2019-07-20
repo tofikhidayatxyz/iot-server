@@ -1,5 +1,6 @@
 'use strict'
 /// validate
+/*
 try {
   let cookie  = document.cookie.split('=');
    if (cookie[0] != 'auth' && !cookie[1]) {
@@ -9,6 +10,7 @@ try {
   console.log(e);
 }
 
+*/
 
 
 function checker(val1,val2) {
@@ -65,9 +67,21 @@ async function getData(url = '', data = {}) {
 }
 
 
+// loading
+
+
+function showLoading() {
+  document.getElementById('loading').classList.add('show');
+}
+
+function hideLoading() {
+  document.getElementById('loading').classList.remove('show');
+}
 
 export default {
   checker ,
   postData ,
-  getData
+  getData ,
+  showLoading ,
+  hideLoading
 }

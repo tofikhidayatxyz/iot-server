@@ -1,6 +1,7 @@
 const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
+   .js('resources/js/login.js', 'public/js')	
    .js('resources/js/schedule.js', 'public/js')
    .sass('resources/sass/style.scss', 'public/css').options({
    //	processCssUrls: process.env.NODE_ENV == "development" ? false : true ,
@@ -11,5 +12,4 @@ mix.js('resources/js/app.js', 'public/js')
         }),
     ]
 });
-
 mix.disableNotifications();

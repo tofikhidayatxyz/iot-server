@@ -1,27 +1,29 @@
-@layout('layouts/blank')
+@layout("layouts/blank")
 
-@section('content')
-	@if(stat && stat == "err")
-	<div class="alert alert-danger rounded-0 border-0">
-		<p class="text-center mb-0">Username or password not valid</p>
+@section("content")
+	<div class="alert alert-danger floating-alert rounded-0">
+		<p class="text-center mb-0">No internet connection</p>
 	</div>
-	@endif
-	<div class="card-header bg-white border-0 pt-5">
-		<h4 class="text-center text-primary mb-0 ">LOGIN</h4>
-	</div>
-	<div class="card-body border-0 pb-5">
+	<div class="card-body pt-5 main border-0 pb-5 full flex-column">
+		<div class="w-100 d-flex justify-content-center mt-5 mb-3">
+			<a href="/">
+				<img src="/images/icon-512x512.png" height="60" alt="">
+			</a>
+		</div>
 		<form action="/login" method="post">
-			<div class='form-group'>
-		        <label for='name' class='font-weight-bold mb-2 float-left text-left'>Username</label>
-		        <input type='text' id='name' name="username" class='swal2-input mt-1 mb-2' placeholder=''>
+			<div class="form-group">
+		        <label for="name" class="col-form-label w-100 text-dark font-weight-semi-bold mb-1" >Username</label>
+		        <input type="text" id="name" name="username" class="form-control font-weight-semi-bold" id="name" placeholder="Enter your username ">
+		        <small class="fail text-danger mt-1">***</small>
 		    </div>
-		    <div class='form-group'>
-		        <label for='password' class='font-weight-bold mb-2 float-left text-left'>Password</label>
-		        <input type='password' id='password' name="password" class='swal2-input mt-1 mb-2' placeholder=''>
-		    </div>
-		    <div class="w-100 mt-4 d-flex justify-content-center ">
-		    	<button class="swal2-confirm swal2-styled bg-primary px-5">Login</button>
+		    <div class="form-group">
+		        <label for="password" class="col-form-label w-100 mb-1 text-dark font-weight-semi-bold" >Password</label>
+		        <input type="password" id="password" name="password" class="form-control font-weight-semi-bold" id="password" autocomplete="off" placeholder="Enter your password">
+		        <small class="fail text-danger mt-1">***</small>
 		    </div>
 		</form>
+		 <div class="w-100 mt-4 d-flex justify-content-center  mt-auto">
+		    	<button class="btn  text-white bg-orange shadow px- px-5 rounded-full btn-block btn-lg font-weight-semi-bold" id="login">Sign In</button>
+		  </div>
 	</div>
 @endsection

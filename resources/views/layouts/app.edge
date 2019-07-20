@@ -2,24 +2,7 @@
 <html lang="en">
 	<head>
 		<title>{{env.APP_NAME}}</title>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-		<meta name="viewport" content="width=device-width , initial-scale=1.0 , user-scalable=no">
-		<meta name="description" content="Iot server">
-		<link rel="manifest" href="/manifest.json">
-		<meta name="keywords" content="iot">
-		<meta name="author" content="tofik hidayat">
-		<link rel="icon" href="/favicon.ico" color="#28c3d4">
-		<meta name="theme-color" content="#28c3d4">
-		<meta property="fb:app_id" content="1234567890">
-		<meta property="og:locale" content="id">
-		<meta property="og:title" content="{{env.APP_TITLE}}">
-		<meta property="og:url" content="">
-		<meta property="og:type" content="iot">
-		<meta property="og:description" content="boot iot">
-		<meta property="og:image" content="/favicon.ico">
-		<!--  linked stylesheet file -->
-		<link rel="stylesheet" type="text/css" href="/css/style.css">
+		@include('layouts.head')
 	</head>
 		<body class="bg-secondary " id="content">
 			<div class="main" id="main-content">

@@ -78,6 +78,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // auth
 app.use('/login', require('./routes/login'));
+app.all("/design/*",(req,res,next)=>{
+    return res.render('design');
+})
+
 // midleware
 app.use(async (req, res, next) => {
     let stat = await validate(req.cookies.auth);
