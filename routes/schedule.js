@@ -52,8 +52,7 @@ router.post('/update', async (req, res, next) => {
     })
 })
 router.get('/all', (req, res, next) => {
-    //ORDER BY schedule.time
-    db.query(`SELECT schedule.time,schedule.id,schedule.action,client.name as target FROM  schedule INNER JOIN client ON client.id=schedule.client_id `, (err, results, fields) => {
+    db.query(`SELECT schedule.time,schedule.id,schedule.action,client.name as target FROM  schedule INNER JOIN client ON client.id=schedule.client_id ORDER BY schedule.time`, (err, results, fields) => {
         if (err) throw err;
         db.query('SELECT * from status', (err, result, field) => {
             if (err) throw err;

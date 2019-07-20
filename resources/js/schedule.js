@@ -2,6 +2,7 @@
 import Swal from 'sweetalert2'
 import util from './utils';
 let last_append = '';
+let isContentLoaded = false;
 
 const swalWithBootstrapButtons = Swal.mixin({
     confirmButtonClass: 'btn btn-success',
@@ -121,25 +122,25 @@ const editEvent = function() {
         Swal.fire({
             title: 'Controller Data',
             html: `<form  id='form-new-item' enctype='multipart/form-data'>
-					    <div class='form-group'>
-					        <label for='' class='font-weight-bold mb-0 float-left text-left'>Action</label>
-					        <select class='swal2-input mt-1 mb-2' id='action'>
-								<option value='on' ${result['data'][0]['action'] == 'on' ? 'selected' : ''}>Turn on</option>
-								<option value='off' ${result['data'][0]['action'] == 'off' ? 'selected' : ''}>Turn off</option>
-					        </select>
-					     </div>
-					     <div class='form-group'>
-					        <label for='' class='font-weight-bold mb-0 float-left text-left'>Target</label>
-					        <select class='swal2-input mt-1 mb-2' id='target'>
-								${client}
-					        </select>
-					     </div>
-					    <div class='form-group'>
-					        <label for='' class='font-weight-bold mb-0 float-left text-left'>TIme</label>
-					        <input type='time' id='time' class='swal2-input mt-1 mb-2' placeholder='' value='${result['data'][0]['time']}'> </div>
-					    </div>
-					</form>
-				 	`,
+                        <div class='form-group'>
+                            <label for='' class='font-weight-bold mb-0 float-left text-left'>Action</label>
+                            <select class='swal2-input mt-1 mb-2' id='action'>
+                                <option value='on' ${result['data'][0]['action'] == 'on' ? 'selected' : ''}>Turn on</option>
+                                <option value='off' ${result['data'][0]['action'] == 'off' ? 'selected' : ''}>Turn off</option>
+                            </select>
+                         </div>
+                         <div class='form-group'>
+                            <label for='' class='font-weight-bold mb-0 float-left text-left'>Target</label>
+                            <select class='swal2-input mt-1 mb-2' id='target'>
+                                ${client}
+                            </select>
+                         </div>
+                        <div class='form-group'>
+                            <label for='' class='font-weight-bold mb-0 float-left text-left'>TIme</label>
+                            <input type='time' id='time' class='swal2-input mt-1 mb-2' placeholder='' value='${result['data'][0]['time']}'> </div>
+                        </div>
+                    </form>
+                    `,
             showCancelButton: true,
             confirmButtonText: 'Save',
             cancelButtonText: 'Cancel',
@@ -196,15 +197,15 @@ function appendElement(data) {
     parent.classList.add('w-100', 'bg-white', 'shadow', 'rounded', 'list-schedule', 'px-2', 'mt-2', 'schedule-' + data.id);
     parent.setAttribute('id', data.id);
     parent.innerHTML = `
-				<div class="time">
-					<p class="text-left mb-0 time text-primary __time mr-auto">${data.time}</p>
-				</div>
-				<div class="command px-2">
-					<p class="mb-0 text-truncate w-100 text-grey __command">Turn <span class="action-name">${data.action}</span> <span class="item-name">${data.target}</span></p>
-				</div>
-				<div class="action"></div>
-			</div>
-			`;
+                <div class="time">
+                    <p class="text-left mb-0 time text-primary __time mr-auto">${data.time}</p>
+                </div>
+                <div class="command px-2">
+                    <p class="mb-0 text-truncate w-100 text-grey __command">Turn <span class="action-name">${data.action}</span> <span class="item-name">${data.target}</span></p>
+                </div>
+                <div class="action"></div>
+            </div>
+            `;
     let btnEdit = document.createElement('div');
     btnEdit.classList.add('btn', 'p-0', 'ml-1', 'text-warning', 'btn-edit', 'float-right');
     btnEdit.setAttribute('data-id', data.id);
@@ -239,26 +240,26 @@ document.querySelector('#plus').addEventListener('click', function(event) {
         Swal.fire({
             title: 'Add new schedule',
             html: `
-				<form  id='form-new-item' enctype='multipart/form-data'>
-			    <div class='form-group'>
-			        <label for='' class='font-weight-bold mb-0 float-left text-left'>Action</label>
-			        <select class='swal2-input mt-1 mb-2' id='action'>
-						<option value='on'>Turn on</option>
-						<option value='off'>Turn off</option>
-			        </select>
-			     </div>
-			     <div class='form-group'>
-			        <label for='' class='font-weight-bold mb-0 float-left text-left'>Target</label>
-			        <select class='swal2-input mt-1 mb-2' id='target'>
-						${client}
-			        </select>
-			     </div>
-			    <div class='form-group'>
-			        <label for='' class='font-weight-bold mb-0 float-left text-left'>TIme</label>
-			        <input type='time' id='time' value='00:00' class='swal2-input mt-1 mb-2' placeholder=''> </div>
-			    </div>
-			</form>
-		 	`,
+                <form  id='form-new-item' enctype='multipart/form-data'>
+                <div class='form-group'>
+                    <label for='' class='font-weight-bold mb-0 float-left text-left'>Action</label>
+                    <select class='swal2-input mt-1 mb-2' id='action'>
+                        <option value='on'>Turn on</option>
+                        <option value='off'>Turn off</option>
+                    </select>
+                 </div>
+                 <div class='form-group'>
+                    <label for='' class='font-weight-bold mb-0 float-left text-left'>Target</label>
+                    <select class='swal2-input mt-1 mb-2' id='target'>
+                        ${client}
+                    </select>
+                 </div>
+                <div class='form-group'>
+                    <label for='' class='font-weight-bold mb-0 float-left text-left'>TIme</label>
+                    <input type='time' id='time' value='00:00' class='swal2-input mt-1 mb-2' placeholder=''> </div>
+                </div>
+            </form>
+            `,
             showCancelButton: true,
             confirmButtonText: 'Save',
             cancelButtonText: 'Cancel',
@@ -354,6 +355,11 @@ function updateSchedule(id) {
 
 let isWait = false;
 const runner = () => {
+
+    if (isContentLoaded == false) {
+        document.querySelector('.loader-line').style.width = '50%';
+    }
+
     // check is is offline
     if (window.navigator.onLine) {
         document.querySelector("#internet").classList.add("connect")
@@ -398,6 +404,14 @@ const runner = () => {
                             //console.log(arr)
                         }
                     }
+                }
+
+                if (isContentLoaded == false) {
+                    isContentLoaded = true;
+                    document.querySelector('.loader-line').style.width = '100%';
+                    setTimeout(() => {
+                        document.querySelector('.loader-line').style.width = '0%';
+                    }, 200)
                 }
 
                 filtrator(arr, client);

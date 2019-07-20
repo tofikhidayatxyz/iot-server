@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import util from './utils';
 let innerContentHeight = 0;
 let last_append = '';
+let isContentLoaded = false;
 
 const swalWithBootstrapButtons = Swal.mixin({
     confirmButtonClass: 'btn btn-success',
@@ -61,19 +62,19 @@ document.querySelector('#plus').addEventListener('click', async function(event) 
     Swal.fire({
         title: 'Add New Controller',
         html: `
-			<form  id='form-new-item' enctype='multipart/form-data'>
-		    <div class='form-group'>
-		        <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller label</label>
-		        <input type='text' id='new-label' class='swal2-input mt-1 mb-2' placeholder='Controller Label '> </div>
-		    <div class='form-group'>
-		        <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Access</label>
-		        <input type='text' id='new-access' class='swal2-input mt-1 mb-2' placeholder='Controller Access '> </div>
-		    <div class='form-group'>
-		        <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Description</label>
-		        <textarea id='new-desc' class='swal2-textarea mt-1 mb-0' placeholder='Controller Description '></textarea>
-		    </div>
-		</form>
-	 	`,
+            <form  id='form-new-item' enctype='multipart/form-data'>
+            <div class='form-group'>
+                <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller label</label>
+                <input type='text' id='new-label' class='swal2-input mt-1 mb-2' placeholder='Controller Label '> </div>
+            <div class='form-group'>
+                <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Access</label>
+                <input type='text' id='new-access' class='swal2-input mt-1 mb-2' placeholder='Controller Access '> </div>
+            <div class='form-group'>
+                <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Description</label>
+                <textarea id='new-desc' class='swal2-textarea mt-1 mb-0' placeholder='Controller Description '></textarea>
+            </div>
+        </form>
+        `,
         showCancelButton: true,
         confirmButtonText: 'Save',
         cancelButtonText: 'Cancel',
@@ -130,7 +131,7 @@ function newValidate(title, desc, access) {
 // Onswitch
 const switchEvent = function() {
     let item = this;
-    document.querySelector('.loader-line').style.width = '50%';
+
     util.postData('/edit/switch', {
         id: item.getAttribute('data-id'),
         status: item.classList.contains('on') == true ? 'off' : 'on'
@@ -166,24 +167,24 @@ const viewEvent = function() {
         Swal.fire({
             title: 'Controller Data',
             html: `<form action='demo' enctype='multipart/form-data'>
-							    <div class='form-group'>
-							        <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller label</label>
-							        <input type='text' value='${data[0]['name']}' class='swal2-input mt-1 mb-2 disabled bg-white border-0 px-0 ' disabled placeholder='Controller Label '>
-							    </div>
-							    <div class='form-group'>
-							        <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Access</label>
-							        <input type='text' value='${data[0]['access']}' class='swal2-input mt-1 mb-2 disabled bg-white border-0 px-0' disabled placeholder='Controller Access '>
-							    </div>
-							    <div class='form-group'>
-							        <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Description</label>
-							        <textarea class='swal2-input mt-1 mb-2 disabled bg-white border-0 px-0' disabled placeholder='Controller Description '>${data[0]['description']}</textarea>
-							    </div>
-							    <div class='form-group'>
-							        <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Status</label>
-							        <input type='text' value='${data[0]['status']}' class='swal2-input mt-1 mb-2 disabled bg-white border-0 px-0' disabled placeholder='Controller Access '>
-							    </div>
-							</form>
-				 	`,
+                                <div class='form-group'>
+                                    <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller label</label>
+                                    <input type='text' value='${data[0]['name']}' class='swal2-input mt-1 mb-2 disabled bg-white border-0 px-0 ' disabled placeholder='Controller Label '>
+                                </div>
+                                <div class='form-group'>
+                                    <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Access</label>
+                                    <input type='text' value='${data[0]['access']}' class='swal2-input mt-1 mb-2 disabled bg-white border-0 px-0' disabled placeholder='Controller Access '>
+                                </div>
+                                <div class='form-group'>
+                                    <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Description</label>
+                                    <textarea class='swal2-input mt-1 mb-2 disabled bg-white border-0 px-0' disabled placeholder='Controller Description '>${data[0]['description']}</textarea>
+                                </div>
+                                <div class='form-group'>
+                                    <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Status</label>
+                                    <input type='text' value='${data[0]['status']}' class='swal2-input mt-1 mb-2 disabled bg-white border-0 px-0' disabled placeholder='Controller Access '>
+                                </div>
+                            </form>
+                    `,
             confirmButtonText: 'Ok',
             confirmButtonColor: 'var(--info)',
         })
@@ -206,21 +207,21 @@ const editEvent = function() {
         Swal.fire({
             title: 'Edit Controller',
             html: `
-							<form action='demo' id='form-edit-item' enctype='multipart/form-data'>
-							    <div class='form-group'>
-							        <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller label</label>
-							        <input type='text' id='upd-label' class='swal2-input mt-1 mb-2' value='${data[0]['name']}' placeholder='Controller Label '>
-							    </div>
-							    <div class='form-group'>
-							        <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Access</label>
-							        <input type='text' id='upd-access' class='swal2-input mt-1 mb-2' value='${data[0]['access']}' placeholder='Controller Access '>
-							    </div>
-							    <div class='form-group'>
-							        <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Description</label>
-							        <textarea id='upd-desc' class='swal2-textarea mt-1 mb-0' placeholder='Controller Description '>${data[0]['description']}</textarea>
-							    </div>
-							</form>
-				 		`,
+                            <form action='demo' id='form-edit-item' enctype='multipart/form-data'>
+                                <div class='form-group'>
+                                    <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller label</label>
+                                    <input type='text' id='upd-label' class='swal2-input mt-1 mb-2' value='${data[0]['name']}' placeholder='Controller Label '>
+                                </div>
+                                <div class='form-group'>
+                                    <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Access</label>
+                                    <input type='text' id='upd-access' class='swal2-input mt-1 mb-2' value='${data[0]['access']}' placeholder='Controller Access '>
+                                </div>
+                                <div class='form-group'>
+                                    <label for='' class='font-weight-bold mb-0 float-left text-left'>Controller Description</label>
+                                    <textarea id='upd-desc' class='swal2-textarea mt-1 mb-0' placeholder='Controller Description '>${data[0]['description']}</textarea>
+                                </div>
+                            </form>
+                        `,
             showCancelButton: true,
             confirmButtonText: 'Save',
             cancelButtonText: 'Cancel',
@@ -276,20 +277,20 @@ function appendElement(data) {
     parent.classList.add('col-6', 'list-data', 'p-2');
     parent.setAttribute('id', 'data-ist-entry-' + data.id);
     parent.innerHTML = `
-					<div class='card border-0 bg-white border-grey border shadow'>
-					    <div class='card-header bg-white pt-2 pb-2 px-3  clearfix'>
-					        <div class='clearfix text-truncate'><small class='font-weight-bold text-grey  initial '>${data.name}</small></div>
-					    </div>
-					    <div class='card-content h-100 d-flex justify-content-center align-items-center item-switch'>
-					    </div>
-					    <div class='card-footer py-1 text-dark bg-white'>
-					        <div class='row w-100'>
-					            <div class='col-4 item-view'></div>
-					            <div class='col-4 item-edit'></div>
-					            <div class='col-4 item-delete'></div>
-					        </div>
-					    </div>
-					</div>`;
+                    <div class='card border-0 bg-white border-grey border shadow'>
+                        <div class='card-header bg-white pt-2 pb-2 px-3  clearfix'>
+                            <div class='clearfix text-truncate'><small class='font-weight-bold text-grey  initial '>${data.name}</small></div>
+                        </div>
+                        <div class='card-content h-100 d-flex justify-content-center align-items-center item-switch'>
+                        </div>
+                        <div class='card-footer py-1 text-dark bg-white'>
+                            <div class='row w-100'>
+                                <div class='col-4 item-view'></div>
+                                <div class='col-4 item-edit'></div>
+                                <div class='col-4 item-delete'></div>
+                            </div>
+                        </div>
+                    </div>`;
 
     let btnSwitch = document.createElement('button');
     btnSwitch.classList.add('btn', 'button-entry', 'bg-transparent', 'border-0', 'shadow-none', data.status);
@@ -438,6 +439,11 @@ function filtrator(dom, db) {
 let isWait = false;
 
 const runCall = () => {
+
+    if (isContentLoaded == false) {
+        document.querySelector('.loader-line').style.width = '50%';
+    }
+
     if (isWait == false) {
         isWait = true;
 
@@ -488,8 +494,18 @@ const runCall = () => {
                         }
                     }
                 }
+
+                if (isContentLoaded == false) {
+                    isContentLoaded = true;
+                    document.querySelector('.loader-line').style.width = '100%';
+                    setTimeout(() => {
+                        document.querySelector('.loader-line').style.width = '0%';
+                    }, 200)
+                }
+
                 filtrator(arr, client);
                 isWait = false
+
             }).catch((err) => {
                 document.querySelector("#server").classList.remove("connect")
                 console.log(err);
