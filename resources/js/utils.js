@@ -12,19 +12,23 @@ try {
 // update worker
 
 document.getElementById('update-worker').addEventListener('click',()=>{
-
     try {
       caches.delete('static-cache-v1');
     } catch(e) {}
     window.location.reload() ;
 })
 
-document.getElementById('show-drop').addEventListener('click',()=>{
+document.addEventListener('click',()=>{
+   document.querySelector('.dropdown-v').classList.remove('show');
+})
+document.getElementById('show-drop').addEventListener('click',(event)=>{
+  event.preventDefault();
+  event.stopPropagation();
   document.querySelector('.dropdown-v').classList.toggle('show');
+
 })
 
 document.querySelector('.dropdown-v').addEventListener('click',(event)=>{
-  even.preventDefault();
   event.stopPropagation();
 })
 

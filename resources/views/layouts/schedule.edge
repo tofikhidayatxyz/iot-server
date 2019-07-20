@@ -29,8 +29,15 @@
 					<div class="header-text float-left ml-auto">
 						<h5 class="text-center mb-0 text-white font-weight-normal">{{env.APP_TITLE}}</h5>
 					</div>
-					<div class="header-plus float-left ">
-						<a class="btn fa fa-sign-out text-white  pl-0 f-as " href="/login/exit"></a>
+					<div class="header-plus pr-0 ml-auto float-left ">
+						<button class="btn pl-0 pb-0" id="show-drop">
+							<i class="fa fa-ellipsis-v text-white "></i>
+						</button>
+					</div>
+					<div class="loader-line"></div>
+					<div class="dropdown-v rounded">
+						<a href="#update" id="update-worker">Update</a>
+						<a href="/login/exit" id="signout">Signout</a>
 					</div>
 				</header>
 				<main class="w-100 h-100 d-block bg-secondary" id="main-action-content">
