@@ -4,8 +4,8 @@
 
 #define ARRAY_SIZE(x) sizeof(x)/sizeof(x[0])
 
-char ssid[] = "syntac.co.id";
-char pass[] = "willy@syntac.co";  
+char ssid[] = "";
+char pass[] = "";  
 char host[] = "http://13.250.47.156:3030/api";
 
 
